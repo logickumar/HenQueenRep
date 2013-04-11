@@ -1,0 +1,24 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="match_parent">
+ <!--     <ImageView 
+        android:id="@+id/imgBackground"
+        android:src="@drawable/backplay"
+        android:adjustViewBounds="true"
+        android:layout_gravity="center_vertical"
+        android:scaleType="fitXY"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:contentDescription="@string/test"/> -->
+
+    <SurfaceView
+        android:id="@+id/surfaceViewGame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+        
+    
+    
+    
+    
+</FrameLayout>

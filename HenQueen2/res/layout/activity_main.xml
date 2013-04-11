@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView 
+        android:id="@+id/imgBackground"
+        android:src="@drawable/background1"
+        android:adjustViewBounds="true"
+        android:layout_gravity="center_vertical"
+        android:scaleType="fitXY"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:contentDescription="@string/test"/>
+
+    <LinearLayout
+        android:id="@+id/mainsection"
+        android:layout_width="match_parent"
+        android:layout_height="372dp"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/imgStartButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:clickable="true"
+            android:contentDescription="@string/tests"
+            android:src="@drawable/startbutton" />
+    </LinearLayout>
+
+</FrameLayout>
