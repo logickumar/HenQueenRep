@@ -21,6 +21,7 @@ public class Game {
 	public AntFood antFood;
 	public Crow crow;
 	public Kid kid;
+	int test=0;
 
 	
 	Game(Activity playScreenActivity,SurfaceHolder holder,SurfaceView surfaceView)
