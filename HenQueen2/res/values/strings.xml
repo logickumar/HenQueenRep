@@ -7,5 +7,6 @@
     <string name="test">test</string>
     <string name="tests">tests</string>
     <string name="title_activity_play_screenctivity">PlayScreenctivity</string>
+    <string name="title_activity_score_screen">ScoreScreenActivity</string>
 
 </resources>
