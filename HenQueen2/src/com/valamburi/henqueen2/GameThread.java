@@ -25,7 +25,7 @@ public class GameThread extends Thread implements OnTouchListener,OnGestureListe
 	Hen hen=null;
 	Chick chick;
 	Cat cat;
-	Ant ant;
+	Ant ant=null;
 	AntFood antFood;
 	Crow crow;
 	Kid kid;
@@ -58,17 +58,17 @@ public class GameThread extends Thread implements OnTouchListener,OnGestureListe
 		int count=0;
 		while(game.isRunning && count<150)
 		{
-		try
-		{
-			Log.d("HEN", "Run");
-			Draw();
-			this.sleep(300);
-			count++;
-		}
-		catch(Exception ex)
-		{
-			Log.d("HEN", ex.toString());
-		}
+			try
+			{
+				Log.d("HEN", "Run");
+				Draw();
+				this.sleep(300);
+				count++;
+			}
+			catch(Exception ex)
+			{
+				Log.d("HEN", ex.toString());
+			}
 		}
 	}
 	@SuppressWarnings("deprecation")
@@ -104,26 +104,29 @@ public class GameThread extends Thread implements OnTouchListener,OnGestureListe
 	        {
 	        	henCurrentBitmap=hen.resources.drawables.get(1);
 	        }*/
+	        
+	        
 	        canvas.drawBitmap(chick.NextBitmap(), chick.x,chick.y,new Paint());
-	        hen.DoUpdate();
+	        
+	        hen.DoUpdate();	        
 	        canvas.drawBitmap(hen.NextBitmap(), hen.x, hen.y, new Paint());
-	        cat.DoUpdate();
+	        
+	        cat.DoUpdate();	        
 	        canvas.drawBitmap(cat.NextBitmap(), cat.x,cat.y,new Paint());
-	        antFood.DoUpdate();
+	        
+	        antFood.DoUpdate();	        
 	        canvas.drawBitmap(antFood.NextBitmap(),antFood.x,antFood.y,new Paint());
-	        ant.DoUpdate();
+	        
+	        ant.DoUpdate();	        
 	        canvas.drawBitmap(ant.NextBitmap(), ant.x,ant.y,new Paint());
+	        
 	        crow.DoUpdate();
 	        canvas.drawBitmap(crow.NextBitmap(),crow.x,crow.y,new Paint());
+	        
 	        kid.DoUpdate();
 	        canvas.drawBitmap(kid.NextBitmap(),kid.x,kid.y,new Paint());
 	        
 	        
-	        
-	        
-	        
-//	        Bitmap chickBitmap2=chick.resources.drawables.get(1);
-//	        canvas.drawBitmap(chickBitmap2,70,170,new Paint());
 		}
 		
 		
@@ -147,16 +150,47 @@ public class GameThread extends Thread implements OnTouchListener,OnGestureListe
 			Log.d("HEN","touch handled");
 			touched_x=event.getX();
 			touched_y=event.getY();
-			
-			
 			Display display = playScreen.getWindowManager().getDefaultDisplay();
 			Point size = new Point();
 			display.getSize(size);
 			int screenWidth = size.x;
 			int screenHeight = size.y;
+			if(ant.istouched(touched_x,touched_y))
+			{
+				if(hen.hen_endy<ant.ant_starty)
+				{
+					hen.direction=AllConstants.HenDirection.HEN_FRONT;
+				}
+				else if(hen.hen_starty>ant.ant_starty)
+				{
+					hen.direction=AllConstants.HenDirection.HEN_BACK;
+				}
+						
+			}
+			if(chick.istouched(touched_x,touched_y))
+			{
+				if(hen.hen_endy<chick.chick_starty){
+					hen.direction=AllConstants.HenDirection.HEN_FRONT;
+				}
+				else if(hen.hen_endy>chick.chick_starty)
+				{
+					hen.direction=AllConstants.HenDirection.HEN_BACK;
+				}
+			}
+			if(hen.henAction==AllConstants.HenAction.HEN_EAT_FOOD){
+				//ant.resources.visibility=false;
+			}
+			
+			
+			
+			//if(hen.y>10 && (ant.y && ant.antWidth)
+			
+			
+			/*
 			
 			float midX=screenWidth/2;
 			float midY=screenHeight/2;
+			
 			if(hen.henAction==AllConstants.HenAction.HEN_WALK)
 			{
 			if(touched_y<=midY && hen.direction==AllConstants.HenDirection.HEN_FRONT )
@@ -215,13 +249,13 @@ public class GameThread extends Thread implements OnTouchListener,OnGestureListe
 			}
 			}
 			
-			/*if(ant.isTouched())
+			if(ant.isTouched())
 			{
 			if(touched_x>=ant.x && touched_y<=ant.y)
 			{
 				
 			}
-		}*/
+		}
 			if(hen.henAction==AllConstants.HenAction.HEN_FLY)
 			{
 			if(touched_y<=midY && touched_x<=midX && hen.direction==AllConstants.HenDirection.HEN_FRONT)
@@ -262,7 +296,7 @@ public class GameThread extends Thread implements OnTouchListener,OnGestureListe
 				
 				
 			}
-			}
+			}*/
 			if(action==MotionEvent.ACTION_DOWN){
 //				if(hen.direction.equals(AllConstants.HEN_BACK))
 //				{
@@ -272,16 +306,16 @@ public class GameThread extends Thread implements OnTouchListener,OnGestureListe
 //				{
 //					hen.y+=10;
 //				}
-				hen.stepsToMove=5;
+				
 				hen.henAction=AllConstants.HenAction.HEN_WALK;
+				hen.henAction=AllConstants.HenAction.HEN_EAT_FOOD;
 				hen.henAction=AllConstants.HenAction.HEN_WALK_WITH_FOOD;
 				
 				//mGestureDetector.onLongPress(event);	
 			}
 			if(action==MotionEvent.ACTION_MOVE)
 			{
-				hen.stepsToMove=2;
-				hen.henAction=AllConstants.HenAction.HEN_EAT_FOOD;
+				
 				
 				//hen.x=touched_x;
 				//hen.y=touched_y;

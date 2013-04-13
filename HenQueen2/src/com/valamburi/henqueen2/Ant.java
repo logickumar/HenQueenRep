@@ -74,26 +74,24 @@ public class Ant extends GameScreenObject {
 		return bitmapNext;
 		
 	}
-	public void AntCollision() {
+	public boolean istouched(float tx,float ty){
 		// TODO Auto-generated method stub
-		if(nextIndex==0)
-		{
-		bitmap=resources.drawables.get(nextIndex);
-		antWidth=bitmap.getHeight();
-		antHeight=bitmap.getWidth();
-		nextIndex=1;
-		}
-		else
-		{
-			bitmap=resources.drawables.get(nextIndex);
-			antWidth=bitmap.getHeight();
-			antHeight=bitmap.getWidth();
-			
-		}
+		
+		bitmap=resources.drawables.get(0);
+		antWidth=bitmap.getWidth();
+		antHeight=bitmap.getHeight();
 		ant_startx=x;
 		ant_starty=y;
 		ant_endx=x+antWidth+antHeight;
 		ant_endy=y+antHeight+antWidth;
+		
+		if(tx>=ant_startx && tx<=ant_endx && ty>=ant_starty && ty<=ant_endy)
+		{
+			return true;
+		}
+		return false;
+		
+		
 	}
 
 }

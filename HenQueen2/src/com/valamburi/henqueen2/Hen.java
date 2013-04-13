@@ -14,6 +14,7 @@ public class Hen extends GameScreenObject
 	public int nextIndex;
 	Bitmap bitmap;
 	Ant ant;
+	Chick chick;
 	float henHeight,henWidth,hen_startx,hen_starty,hen_endx,hen_endy;
 	//float ant_startx;
 	
@@ -26,42 +27,29 @@ public class Hen extends GameScreenObject
 		this.henAction=henAction;
 		this.stepsToMove=0;
 		nextIndex=0;
+		
 		//ant_startx=0;
 	}
 	public boolean istouched()
 	{
 		
-		if(nextIndex==0){
+		
 		bitmap=resources.drawables.get(nextIndex);
 		henHeight=bitmap.getHeight();
 		henWidth=bitmap.getWidth();
-		//nextIndex=1;
-		}else if(nextIndex==1)
-		{
-			bitmap=resources.drawables.get(nextIndex);
-			henHeight=bitmap.getHeight();
-			henWidth=bitmap.getWidth();
-			//nextIndex=2;
-		}
-		else
-		{
-			bitmap=resources.drawables.get(nextIndex);
-			henHeight=bitmap.getHeight();
-			henWidth=bitmap.getWidth();
-		}
-		 hen_startx=x;
+	     hen_startx=x;
 		 hen_starty=y;
 		
 		 hen_endx=hen_startx+henWidth+henHeight;
 		hen_endy=hen_starty+henHeight+henWidth;
-		ant.AntCollision();
+		
 		//ant.istouched(hen_startx,hen_starty,hen_endx,hen_endy);hen.HenCollision();
-		if(hen_startx>=ant.ant_startx && hen_endx<=ant.ant_endx && hen_starty>=ant.ant_starty && hen_endy<=ant.ant_endy)
+		/*if(hen_startx>=ant.ant_startx && hen_endx<=ant.ant_endx && hen_starty>=ant.ant_starty && hen_endy<=ant.ant_endy)
 		{
 			henAction=AllConstants.HenAction.HEN_EAT_FOOD;
 			// boolean istouched=true;
 			
-		}
+		}*/
 		return true;
 	}
 		
@@ -73,58 +61,77 @@ public class Hen extends GameScreenObject
 		if(henAction==AllConstants.HenAction.HEN_WALK)
 		{
 			
-	if(stepsToMove>0){
+	
 		if(direction==AllConstants.HenDirection.HEN_FRONT)
 		{
-			y+=10;
-		}
+			if(y<=ant.y && y<ant.y+ant.antWidth)
+			{
+			y+=5;	
+			}
+			else
+			{
+				henAction=AllConstants.HenAction.HEN_EAT_FOOD;
+			}
+	    }
 		else
 		{
-			y-=10;
+			if(y>10 && y>ant.y && y>ant.y+ant.antWidth)
+			{
+				y-=5;
+			}
+			else
+			{
+				
+				henAction=AllConstants.HenAction.HEN_EAT_FOOD;
+			}
 		}
-		stepsToMove-=1;
-	}
+		}
 		
 	 else 
 	{
 		henAction=AllConstants.HenAction.HEN_STAND;
 	}
 	
-	}
+	
 	if(henAction==AllConstants.HenAction.HEN_WALK_WITH_FOOD)
 		{
 			
-	if(stepsToMove>0){
+	
 		if(direction==AllConstants.HenDirection.HEN_FRONT)
 		{
-			y+=10;
+			if(y<chick.chick_starty && y<chick.chick_endy)
+			{
+				y+=5;
+				
+			}else
+			{
+				
+				henAction=AllConstants.HenAction.HEN_FEED;
+			}
 		}
 		else
 		{
-			y-=10;
+			if(direction==AllConstants.HenDirection.HEN_BACK)
+			{
+				if(y>chick.chick_starty && y>chick.chick_endy)
+				{
+					y-=5;
+				}
+				else
+				{
+					henAction=AllConstants.HenAction.HEN_FEED;
+				}
+			}
 		}
-		stepsToMove-=1;
+		
 	}
 	 else 
 		{
 			henAction=AllConstants.HenAction.HEN_STAND_WITH_FOOD;
 		}
-		}
+		
 	
-	    if(henAction==AllConstants.HenAction.HEN_EAT_FOOD)
-	    {
-	    	if(stepsToMove>0)
-	    	{
-	    	if(direction==AllConstants.HenDirection.HEN_FRONT)
-	    	{
-	    	y++;	
-	    	}
-	    	else
-	    	{
-	    		y--;
-	    	}
-	    	}
-	    }
+	    
 		if(henAction==AllConstants.HenAction.HEN_FLY)
 		{
 			
