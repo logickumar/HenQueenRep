@@ -28,11 +28,15 @@ public class MainActivity extends Activity implements OnClickListener {
 		startButton.setOnClickListener(this);
 		startButtonAnim = AnimationUtils.loadAnimation(this, R.anim.button_flicker);
 		
-		 
+		
     }
+    
 
 
-    @Override
+    
+
+
+	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
@@ -43,8 +47,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		Intent playScreenIntent=new Intent(this, PlayScreenctivity.class);
-	    
+		Intent playScreenIntent=new Intent(this,ScoreScreenActivity.class);
 	    v.startAnimation(startButtonAnim);
 	    startButtonAnim.setAnimationListener(new StartActivityAfterAnimationAndSound(this,playScreenIntent,R.raw.applause));
         		

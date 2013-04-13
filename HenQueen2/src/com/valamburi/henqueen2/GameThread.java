@@ -195,6 +195,25 @@ public class GameThread extends Thread implements OnTouchListener,OnGestureListe
 				
 			}
 			}
+			if(hen.henAction==AllConstants.HenAction.HEN_EAT_FOOD)
+			{
+			if(touched_y<=midY && hen.direction==AllConstants.HenDirection.HEN_FRONT )
+			{
+				hen.direction=AllConstants.HenDirection.HEN_BACK;
+				hen.stepsToMove=0;
+				//hen.x=touched_x;
+				//hen.y=touched_y;
+				
+			}
+			else if(touched_y>midY && hen.direction==AllConstants.HenDirection.HEN_BACK)
+			{
+				hen.direction=AllConstants.HenDirection.HEN_FRONT;
+				hen.stepsToMove=0;
+				//hen.x=touched_x;
+				//hen.y=touched_y;
+				
+			}
+			}
 			
 			/*if(ant.isTouched())
 			{
@@ -255,14 +274,14 @@ public class GameThread extends Thread implements OnTouchListener,OnGestureListe
 //				}
 				hen.stepsToMove=5;
 				hen.henAction=AllConstants.HenAction.HEN_WALK;
-				hen.henAction=AllConstants.HenAction.HEN_EAT_FOOD;
 				hen.henAction=AllConstants.HenAction.HEN_WALK_WITH_FOOD;
 				
 				//mGestureDetector.onLongPress(event);	
 			}
 			if(action==MotionEvent.ACTION_MOVE)
 			{
-				
+				hen.stepsToMove=2;
+				hen.henAction=AllConstants.HenAction.HEN_EAT_FOOD;
 				
 				//hen.x=touched_x;
 				//hen.y=touched_y;

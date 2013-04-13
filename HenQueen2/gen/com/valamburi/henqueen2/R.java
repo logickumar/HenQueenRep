@@ -36,61 +36,78 @@ public final class R {
         public static final int antrightmove1=0x7f020009;
         public static final int background=0x7f02000a;
         public static final int background1=0x7f02000b;
-        public static final int backplay=0x7f02000c;
-        public static final int backplayorig=0x7f02000d;
-        public static final int catwalkleft1=0x7f02000e;
-        public static final int catwalkleft2=0x7f02000f;
-        public static final int catwalkright1=0x7f020010;
-        public static final int catwalkright2=0x7f020011;
-        public static final int chicksbitmap1=0x7f020012;
-        public static final int chicksbitmap2=0x7f020013;
-        public static final int crowfly=0x7f020014;
-        public static final int crowimg=0x7f020015;
-        public static final int crowleftimg=0x7f020016;
-        public static final int crowmoveleft=0x7f020017;
-        public static final int crowmoveright1=0x7f020018;
-        public static final int crowrightimg1=0x7f020019;
-        public static final int heneatfoodleft1=0x7f02001a;
-        public static final int heneatfoodleft2=0x7f02001b;
-        public static final int heneatfoodright1=0x7f02001c;
-        public static final int heneatfoodright2=0x7f02001d;
-        public static final int heneatleft1=0x7f02001e;
-        public static final int heneatleft2=0x7f02001f;
-        public static final int heneatright1=0x7f020020;
-        public static final int heneatright2=0x7f020021;
-        public static final int henjumpleft1=0x7f020022;
-        public static final int henjumpleft2=0x7f020023;
-        public static final int henjumpright1=0x7f020024;
-        public static final int henjumpright2=0x7f020025;
-        public static final int henstandleft=0x7f020026;
-        public static final int henstandright=0x7f020027;
-        public static final int henwalkleft1=0x7f020028;
-        public static final int henwalkleft2=0x7f020029;
-        public static final int henwalkright1=0x7f02002a;
-        public static final int henwalkright2=0x7f02002b;
+        public static final int backplayorig=0x7f02000c;
+        public static final int catwalkleft1=0x7f02000d;
+        public static final int catwalkleft2=0x7f02000e;
+        public static final int catwalkright1=0x7f02000f;
+        public static final int catwalkright2=0x7f020010;
+        public static final int chicksbitmap1=0x7f020011;
+        public static final int chicksbitmap2=0x7f020012;
+        public static final int crowfly=0x7f020013;
+        public static final int crowimg=0x7f020014;
+        public static final int crowleftimg=0x7f020015;
+        public static final int crowmoveleft=0x7f020016;
+        public static final int crowmoveright1=0x7f020017;
+        public static final int crowrightimg1=0x7f020018;
+        public static final int heneatfoodleft1=0x7f020019;
+        public static final int heneatfoodleft2=0x7f02001a;
+        public static final int heneatfoodright1=0x7f02001b;
+        public static final int heneatfoodright2=0x7f02001c;
+        public static final int heneatleft1=0x7f02001d;
+        public static final int heneatleft2=0x7f02001e;
+        public static final int heneatright1=0x7f02001f;
+        public static final int heneatright2=0x7f020020;
+        public static final int henjumpleft1=0x7f020021;
+        public static final int henjumpleft2=0x7f020022;
+        public static final int henjumpright1=0x7f020023;
+        public static final int henjumpright2=0x7f020024;
+        public static final int henstandleft=0x7f020025;
+        public static final int henstandright=0x7f020026;
+        public static final int henwalkleft1=0x7f020027;
+        public static final int henwalkleft2=0x7f020028;
+        public static final int henwalkright1=0x7f020029;
+        public static final int henwalkright2=0x7f02002a;
+        public static final int home1=0x7f02002b;
         public static final int ic_launcher=0x7f02002c;
-        public static final int kidwalkleft1=0x7f02002d;
-        public static final int kidwalkleft2=0x7f02002e;
-        public static final int kidwalkright1=0x7f02002f;
-        public static final int kidwalkright2=0x7f020030;
-        public static final int maintitle=0x7f020031;
-        public static final int startbutton=0x7f020032;
-        public static final int startbutton1=0x7f020033;
+        public static final int imagesss=0x7f02002d;
+        public static final int imghome=0x7f02002e;
+        public static final int imgplayagain=0x7f02002f;
+        public static final int imgscorebackground=0x7f020030;
+        public static final int kidwalkleft1=0x7f020031;
+        public static final int kidwalkleft2=0x7f020032;
+        public static final int kidwalkright1=0x7f020033;
+        public static final int kidwalkright2=0x7f020034;
+        public static final int maintitle=0x7f020035;
+        public static final int playnow1=0x7f020036;
+        public static final int playscreenbackground=0x7f020037;
+        public static final int scorebackground=0x7f020038;
+        public static final int scorebutton=0x7f020039;
+        public static final int startbutton=0x7f02003a;
+        public static final int startbutton1=0x7f02003b;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0004;
+        public static final int action_settings=0x7f0a000b;
+        public static final int homeButton=0x7f0a0007;
         public static final int imgBackground=0x7f0a0000;
+        public static final int imgScore=0x7f0a000a;
         public static final int imgStartButton=0x7f0a0002;
+        public static final int linearLayout1=0x7f0a0005;
+        public static final int linearLayout2=0x7f0a0006;
         public static final int mainsection=0x7f0a0001;
+        public static final int playAgainButton=0x7f0a0008;
+        public static final int scoreValue=0x7f0a0009;
+        public static final int scoreimgBackground=0x7f0a0004;
         public static final int surfaceViewGame=0x7f0a0003;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int activity_play_screenctivity=0x7f030001;
+        public static final int activity_score_screen=0x7f030002;
     }
     public static final class menu {
         public static final int main=0x7f090000;
         public static final int play_screenctivity=0x7f090001;
+        public static final int score_screen=0x7f090002;
     }
     public static final class raw {
         public static final int applause=0x7f050000;
@@ -99,9 +116,15 @@ public final class R {
         public static final int action_settings=0x7f070001;
         public static final int app_name=0x7f070000;
         public static final int hello_world=0x7f070002;
+        public static final int home=0x7f07000b;
+        public static final int playagain=0x7f07000a;
+        public static final int score=0x7f070007;
+        public static final int score1=0x7f070008;
+        public static final int scorevalue=0x7f070009;
         public static final int test=0x7f070003;
         public static final int tests=0x7f070004;
         public static final int title_activity_play_screenctivity=0x7f070005;
+        public static final int title_activity_score_screen=0x7f070006;
     }
     public static final class style {
         /** 

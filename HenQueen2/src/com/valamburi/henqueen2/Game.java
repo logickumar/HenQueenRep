@@ -37,7 +37,7 @@ public class Game {
 		//Game
 		isRunning=false;
 		// Background
-		bitmapBackground = BitmapFactory.decodeResource(playScreenActivity.getResources(),R.drawable.backplay);
+		bitmapBackground = BitmapFactory.decodeResource(playScreenActivity.getResources(),R.drawable.playscreenbackground);
 		
 		// Hen stand right
 		Bitmap henStandBitmap= BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.henstandright);

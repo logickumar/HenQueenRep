@@ -8,5 +8,10 @@
     <string name="tests">tests</string>
     <string name="title_activity_play_screenctivity">PlayScreenctivity</string>
     <string name="title_activity_score_screen">ScoreScreenActivity</string>
+    <string name="score">score</string>
+    <string name="score1">score1</string>
+    <string name="scorevalue">scorevalue</string>
+    <string name="playagain">playagain</string>
+    <string name="home">home</string>
 
 </resources>

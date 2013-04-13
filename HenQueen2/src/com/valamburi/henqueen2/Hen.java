@@ -111,7 +111,20 @@ public class Hen extends GameScreenObject
 		}
 		}
 	
-	
+	    if(henAction==AllConstants.HenAction.HEN_EAT_FOOD)
+	    {
+	    	if(stepsToMove>0)
+	    	{
+	    	if(direction==AllConstants.HenDirection.HEN_FRONT)
+	    	{
+	    	y++;	
+	    	}
+	    	else
+	    	{
+	    		y--;
+	    	}
+	    	}
+	    }
 		if(henAction==AllConstants.HenAction.HEN_FLY)
 		{
 			
@@ -126,6 +139,7 @@ public class Hen extends GameScreenObject
 			
 		}
 		}
+		
 		}
 		
 		
