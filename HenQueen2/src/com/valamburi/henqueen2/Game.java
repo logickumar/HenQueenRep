@@ -64,6 +64,10 @@ public class Game {
 		chick.resources.drawables.add(chickBitmap1);
 		Bitmap chickBitmap2=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.chicksbitmap2);
 		chick.resources.drawables.add(chickBitmap2);
+		Bitmap chickBitmap3=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.chickeatbitmap1);
+		chick.resources.drawables.add(chickBitmap3);
+		Bitmap chickBitmap4=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.chickeatbitmap11);
+		chick.resources.drawables.add(chickBitmap4);
 		//Cat right
 		Bitmap catWalkRightBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.catwalkright1);
 		cat=new Cat(70,400,AllConstants.CatDirection.CAT_BACK);

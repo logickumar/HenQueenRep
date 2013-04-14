@@ -3,6 +3,7 @@ package com.valamburi.henqueen2;
 import com.valamburi.henqueen2.AllConstants.HenAction;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 
 public class Hen extends GameScreenObject
@@ -13,7 +14,7 @@ public class Hen extends GameScreenObject
 	public int stepsToMove;
 	public int nextIndex;
 	Bitmap bitmap;
-	Ant ant;
+	//Ant ant;
 	Chick chick;
 	float henHeight,henWidth,hen_startx,hen_starty,hen_endx,hen_endy;
 	//float ant_startx;
@@ -28,9 +29,12 @@ public class Hen extends GameScreenObject
 		this.stepsToMove=0;
 		nextIndex=0;
 		
+
+		
+		
 		//ant_startx=0;
 	}
-	public boolean istouched()
+	/*public boolean istouched()
 	{
 		
 		
@@ -44,117 +48,147 @@ public class Hen extends GameScreenObject
 		hen_endy=hen_starty+henHeight+henWidth;
 		
 		//ant.istouched(hen_startx,hen_starty,hen_endx,hen_endy);hen.HenCollision();
-		/*if(hen_startx>=ant.ant_startx && hen_endx<=ant.ant_endx && hen_starty>=ant.ant_starty && hen_endy<=ant.ant_endy)
+		if(hen_startx>=ant.ant_startx && hen_endx<=ant.ant_endx && hen_starty>=ant.ant_starty && hen_endy<=ant.ant_endy)
 		{
 			henAction=AllConstants.HenAction.HEN_EAT_FOOD;
 			// boolean istouched=true;
 			
-		}*/
-		return true;
-	}
+		}
+		return false;
+	}*/
 		
 	
 	
-	public void Move()
+	public void Move(Game game)
 	{
-					
+			
+		Ant ant=game.ant;
+		Chick chick=game.chick;
+		// Case when Hen Walks
+		
+
+		bitmap=resources.drawables.get(nextIndex);
+		henHeight=bitmap.getHeight();
+		henWidth=bitmap.getWidth();
+	     hen_startx=x;
+		 hen_starty=y;
+		
+		 hen_endx=hen_startx+henWidth+henHeight;
+		hen_endy=hen_starty+henHeight+henWidth;
 		if(henAction==AllConstants.HenAction.HEN_WALK)
 		{
-			
-	
-		if(direction==AllConstants.HenDirection.HEN_FRONT)
-		{
-			if(y<=ant.y && y<ant.y+ant.antWidth)
+			Log.d("HEN", "Walking");
+			if(direction==AllConstants.HenDirection.HEN_FRONT)
 			{
-			y+=5;	
-			}
-			else
-			{
-				henAction=AllConstants.HenAction.HEN_EAT_FOOD;
-			}
-	    }
-		else
-		{
-			if(y>10 && y>ant.y && y>ant.y+ant.antWidth)
-			{
-				y-=5;
-			}
-			else
-			{
-				
-				henAction=AllConstants.HenAction.HEN_EAT_FOOD;
-			}
-		}
-		}
-		
-	 else 
-	{
-		henAction=AllConstants.HenAction.HEN_STAND;
-	}
-	
-	
-	if(henAction==AllConstants.HenAction.HEN_WALK_WITH_FOOD)
-		{
-			
-	
-		if(direction==AllConstants.HenDirection.HEN_FRONT)
-		{
-			if(y<chick.chick_starty && y<chick.chick_endy)
-			{
-				y+=5;
-				
-			}else
-			{
-				
-				henAction=AllConstants.HenAction.HEN_FEED;
-			}
-		}
-		else
-		{
-			if(direction==AllConstants.HenDirection.HEN_BACK)
-			{
-				if(y>chick.chick_starty && y>chick.chick_endy)
+				if(y<=ant.y) //  && y<=ant.y+ant.antWidth)
 				{
-					y-=5;
+					y+=5;	
+					Log.d("HEN", "Walking Front");
+					
 				}
 				else
 				{
-					henAction=AllConstants.HenAction.HEN_FEED;
+				henAction=AllConstants.HenAction.HEN_EAT_FOOD;
+				//	ant.visibility=false;
+					nextIndex=6;
+					Log.d("HEN", "Eat Front");
+				}
+		    }
+			else if(direction==AllConstants.HenDirection.HEN_BACK)
+			{
+				if(y>10 && y>ant.y) //&& y>ant.y+ant.antWidth
+				{
+					y-=5;
+					Log.d("HEN", "Walking Back");
+				}
+				else
+				{
+					
+					henAction=AllConstants.HenAction.HEN_EAT_FOOD;
+					nextIndex=8;
+					//ant.visibility=false;
+					Log.d("HEN", "Eat Back");
 				}
 			}
-		}
+		}		
+
 		
+	// Case when when hen walks with food
+		
+	if(henAction==AllConstants.HenAction.HEN_WALK_WITH_FOOD)
+	{
+			if(direction==AllConstants.HenDirection.HEN_FRONT)
+			{
+				if(y<chick.y && y<chick.chick_endy)
+				{
+					y+=5;
+					Log.d("HEN","Walking Front");
+				}else
+				{
+					
+					henAction=AllConstants.HenAction.HEN_FEED;
+					chick.nextIndex=2;
+				}
+			}
 	}
-	 else 
-		{
-			henAction=AllConstants.HenAction.HEN_STAND_WITH_FOOD;
-		}
+			else
+			{
+				if(direction==AllConstants.HenDirection.HEN_BACK)
+				{
+					if(y>chick.y && y>chick.chick_endy)
+					{
+						y-=5;
+						Log.d("HEN","Walking back");
+					}
+					else
+					{
+						henAction=AllConstants.HenAction.HEN_FEED;
+						chick.nextIndex=2;
+					}
+				}
+			}
 		
+//	
+//	if(henAction==AllConstants.HenAction.HEN_STAND_WITH_FOOD)
+//	{
+//		henAction=AllConstants.HenAction.HEN_WALK_WITH_FOOD;
+//	}
 	
-	    
-		if(henAction==AllConstants.HenAction.HEN_FLY)
-		{
-			
-		if(direction==AllConstants.HenDirection.HEN_FRONT ){
-		  x=5;
-		  y=7;
-		}
-		else
-		{
-			x=5;
-			y=7;
-			
-		}
-		}
+//	// Case wheen hen feeds food
+//	if(henAction==AllConstants.HenAction.HEN_FEED)
+//	{
+//		henAction=AllConstants.HenAction.HEN_STAND;
+//	}
+//	
+//	if(henAction==AllConstants.HenAction.HEN_STAND_WITH_FOOD)
+//	{
+//		ant.visibility=false;
+//	}
 		
-		}
+//    // Case when hen flies		    
+//	if(henAction==AllConstants.HenAction.HEN_FLY)
+//	{
+//		
+//		if(direction==AllConstants.HenDirection.HEN_FRONT )
+//		{
+//		  x=5;
+//		  y=7;
+//		}
+//		else
+//		{
+//			x=5;
+//			y=7;
+//		}
+//	}
+		
+ }
 		
 		
 	
 
-	public void DoUpdate()
+	public void DoUpdate(Game game)
 	{
-		Move();
+		Move(game);
 	}
 	
 	public Bitmap NextBitmap(){
@@ -200,16 +234,16 @@ public class Hen extends GameScreenObject
 				case HEN_EAT_FOOD:
 					if(direction==AllConstants.HenDirection.HEN_FRONT)
 					{
-					if(nextIndex==6)
-					{
-						bitmapNext=resources.drawables.get(nextIndex);
-						nextIndex=7;
-					}
-					else
-					{
-						bitmapNext=resources.drawables.get(nextIndex);
-						
-					}
+						if(nextIndex==6)
+						{
+							bitmapNext=resources.drawables.get(nextIndex);
+							nextIndex=7;
+						}
+						else
+						{
+							bitmapNext=resources.drawables.get(nextIndex);
+							henAction=AllConstants.HenAction.HEN_WALK_WITH_FOOD;
+						}
 					
 					}
 					else
@@ -222,6 +256,7 @@ public class Hen extends GameScreenObject
 						else
 						{
 							bitmapNext=resources.drawables.get(nextIndex);
+							henAction=AllConstants.HenAction.HEN_STAND_WITH_FOOD;
 						}
 					}
 					break;
@@ -262,6 +297,9 @@ public class Hen extends GameScreenObject
 					 
 					}
 					 break;
+				case HEN_FEED:
+					chick.nextIndex=2;
+				
 				case HEN_FLY:
 					if(direction==AllConstants.HenDirection.HEN_FRONT)
 					{

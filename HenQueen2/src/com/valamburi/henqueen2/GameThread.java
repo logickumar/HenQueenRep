@@ -1,6 +1,8 @@
 package com.valamburi.henqueen2;
 //import com.valamburi.henqueen2.AllConstants.CurrentAction;
 
+import com.valamburi.henqueen2.AllConstants.HenAction;
+
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -62,7 +64,7 @@ public class GameThread extends Thread implements OnTouchListener,OnGestureListe
 			{
 				Log.d("HEN", "Run");
 				Draw();
-				this.sleep(300);
+				sleep(300);
 				count++;
 			}
 			catch(Exception ex)
@@ -71,7 +73,6 @@ public class GameThread extends Thread implements OnTouchListener,OnGestureListe
 			}
 		}
 	}
-	@SuppressWarnings("deprecation")
 	public void Draw() throws InterruptedException
 	{
 		Canvas canvas = null;
@@ -93,7 +94,7 @@ public class GameThread extends Thread implements OnTouchListener,OnGestureListe
 			// TODO Auto-generated method stub
 			//super.onDraw(canvas);
 			
-	        canvas.drawBitmap(game.bitmapBackground,1,1, new Paint()); 
+	        canvas.drawBitmap(game.bitmapBackground,0,0, new Paint()); 
 	        
 	        /*Bitmap henCurrentBitmap=null;
 	        if(hen.direction.equals(AllConstants.HEN_FRONT))
@@ -105,11 +106,9 @@ public class GameThread extends Thread implements OnTouchListener,OnGestureListe
 	        	henCurrentBitmap=hen.resources.drawables.get(1);
 	        }*/
 	        
-	        
+	        chick.DoUpdate();
 	        canvas.drawBitmap(chick.NextBitmap(), chick.x,chick.y,new Paint());
-	        
-	        hen.DoUpdate();	        
-	        canvas.drawBitmap(hen.NextBitmap(), hen.x, hen.y, new Paint());
+	     
 	        
 	        cat.DoUpdate();	        
 	        canvas.drawBitmap(cat.NextBitmap(), cat.x,cat.y,new Paint());
@@ -117,14 +116,20 @@ public class GameThread extends Thread implements OnTouchListener,OnGestureListe
 	        antFood.DoUpdate();	        
 	        canvas.drawBitmap(antFood.NextBitmap(),antFood.x,antFood.y,new Paint());
 	        
-	        ant.DoUpdate();	        
-	        canvas.drawBitmap(ant.NextBitmap(), ant.x,ant.y,new Paint());
+	        
+	        ant.DoUpdate();
+	        if(ant.visibility)
+	        	canvas.drawBitmap(ant.NextBitmap(), ant.x,ant.y,new Paint());
 	        
 	        crow.DoUpdate();
 	        canvas.drawBitmap(crow.NextBitmap(),crow.x,crow.y,new Paint());
 	        
 	        kid.DoUpdate();
 	        canvas.drawBitmap(kid.NextBitmap(),kid.x,kid.y,new Paint());
+	        
+	        
+	        hen.DoUpdate(game);	        
+	        canvas.drawBitmap(hen.NextBitmap(), hen.x, hen.y, new Paint());
 	        
 	        
 		}
@@ -153,35 +158,28 @@ public class GameThread extends Thread implements OnTouchListener,OnGestureListe
 			Display display = playScreen.getWindowManager().getDefaultDisplay();
 			Point size = new Point();
 			display.getSize(size);
-			int screenWidth = size.x;
-			int screenHeight = size.y;
+//			int screenWidth = size.x;
+//			int screenHeight = size.y;
 			if(ant.istouched(touched_x,touched_y))
 			{
-				if(hen.hen_endy<ant.ant_starty)
+				Log.d("HEN", "Ant touched");
+				if(hen.hen_endy<=ant.ant_starty)
 				{
 					hen.direction=AllConstants.HenDirection.HEN_FRONT;
 				}
-				else if(hen.hen_starty>ant.ant_starty)
+				else if(hen.hen_starty>=ant.ant_starty)
 				{
 					hen.direction=AllConstants.HenDirection.HEN_BACK;
 				}
+				hen.henAction=AllConstants.HenAction.HEN_WALK;
 						
 			}
-			if(chick.istouched(touched_x,touched_y))
+			else
 			{
-				if(hen.hen_endy<chick.chick_starty){
-					hen.direction=AllConstants.HenDirection.HEN_FRONT;
-				}
-				else if(hen.hen_endy>chick.chick_starty)
-				{
-					hen.direction=AllConstants.HenDirection.HEN_BACK;
-				}
-			}
-			if(hen.henAction==AllConstants.HenAction.HEN_EAT_FOOD){
-				//ant.resources.visibility=false;
+				Log.d("HEN", "Ant not touched");
 			}
 			
-			
+        	
 			
 			//if(hen.y>10 && (ant.y && ant.antWidth)
 			
@@ -306,10 +304,10 @@ public class GameThread extends Thread implements OnTouchListener,OnGestureListe
 //				{
 //					hen.y+=10;
 //				}
-				
-				hen.henAction=AllConstants.HenAction.HEN_WALK;
-				hen.henAction=AllConstants.HenAction.HEN_EAT_FOOD;
-				hen.henAction=AllConstants.HenAction.HEN_WALK_WITH_FOOD;
+//				
+//				hen.henAction=AllConstants.HenAction.HEN_WALK;
+//				hen.henAction=AllConstants.HenAction.HEN_EAT_FOOD;
+//				hen.henAction=AllConstants.HenAction.HEN_WALK_WITH_FOOD;
 				
 				//mGestureDetector.onLongPress(event);	
 			}
