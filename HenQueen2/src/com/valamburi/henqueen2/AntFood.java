@@ -1,11 +1,14 @@
 package com.valamburi.henqueen2;
 
+import java.util.LinkedList;
+
 import android.graphics.Bitmap;
 
 public class AntFood extends GameScreenObject{
-	public AllConstants.AntFoodDirection antFoodDirection;
+	String antFoodDirection;
+	//public AllConstants.AntFoodDirection antFoodDirection;
 	int nextIndex;
-	AntFood(float x,float y,AllConstants.AntFoodDirection antFoodDirection)
+	AntFood(float x,float y,String antFoodDirection)
 	{
 		this.x=x;
 		this.y=y;
@@ -15,7 +18,7 @@ public class AntFood extends GameScreenObject{
 	public void Move()
 	{
 		
-		if(antFoodDirection==AllConstants.AntFoodDirection.ANT_FOOD_FRONT)
+		if(antFoodDirection==AllConstants.ANT_FOOD_FRONT)
 		{
 		y++;	
 		}else
@@ -30,18 +33,10 @@ public class AntFood extends GameScreenObject{
 	}
 	public Bitmap NextBitmap()
 	{
-		Bitmap bitmapNext;
-		if(nextIndex==0)
+		Bitmap bitmapNext=null;
+		if(antFoodDirection.equals(AllConstants.ANT_FOOD_FRONT))
 		{
-			bitmapNext=resources.drawables.get(nextIndex);
-			//this.sleep(500);
-			
-			nextIndex=1;
-		}
-		else
-		{
-			bitmapNext=resources.drawables.get(nextIndex);
-			nextIndex=0;
+			bitmapNext=GetNextBitmap(AllConstants.ANT_FOOD_FRONT);
 		}
 		return bitmapNext;
 	}

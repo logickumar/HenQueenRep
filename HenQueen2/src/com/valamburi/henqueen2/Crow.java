@@ -1,11 +1,13 @@
 package com.valamburi.henqueen2;
 
+import java.util.LinkedList;
+
 import android.graphics.Bitmap;
 
 public class Crow extends GameScreenObject {
-	public AllConstants.CrowDirection crowDirection;
+	public String crowDirection;
 	int nextIndex;
-	Crow(float x,float y,AllConstants.CrowDirection crowDirection)
+	Crow(float x,float y,String crowDirection)
 	{
 		this.x=x;
 		this.y=y;
@@ -19,7 +21,7 @@ public class Crow extends GameScreenObject {
 	public void Move()
 	{
 		//int stepsToMove=0;
-		if(crowDirection==AllConstants.CrowDirection.CROW_DOWN){
+		if(crowDirection==AllConstants.CROW_FRONT){
 			x-=7;
 			y+=7;
 		}
@@ -33,34 +35,14 @@ public class Crow extends GameScreenObject {
 	public Bitmap NextBitmap()
 	{
 		Bitmap bitmapNext = null;
-		if(crowDirection==AllConstants.CrowDirection.CROW_DOWN)
+		if(crowDirection.equals(AllConstants.CROW_FRONT))
 		{
-		if(nextIndex==0)
+			bitmapNext=GetNextBitmap(AllConstants.CROW_FRONT);
+		}
+		else if(crowDirection.equals(AllConstants.CROW_BACK))
 		{
-			bitmapNext=resources.drawables.get(nextIndex);
-			nextIndex=1;
-		}
-		else
-		{
-			bitmapNext=resources.drawables.get(nextIndex);
-			nextIndex=0;
-		}
-		}
-		/*else
-		{
-			if(nextIndex==2)
-			{
-				bitmapNext=resources.drawables.get(nextIndex);
-				nextIndex=3;
-			}
-			else
-			
-			{
-				bitmapNext=resources.drawables.get(nextIndex);
-				nextIndex=2;
-			}
-		}
-		*/
+			bitmapNext=GetNextBitmap(AllConstants.CROW_BACK);
+		}		
 		return bitmapNext;
 	}
 

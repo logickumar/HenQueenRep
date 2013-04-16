@@ -1,11 +1,14 @@
 package com.valamburi.henqueen2;
 
+import java.util.LinkedList;
+
 import android.graphics.Bitmap;
 
 public class Kid extends GameScreenObject{
-	public AllConstants.KidDirection kidDirection;
+	public String kidDirection;
+	//public AllConstants.KidDirection kidDirection;
 	int nextIndex;
-	Kid(float x,float y,AllConstants.KidDirection kidDirection)
+	Kid(float x,float y,String kidDirection)
 	{
 		this.x=x;
 		this.y=y;
@@ -18,10 +21,8 @@ public class Kid extends GameScreenObject{
 	}
 	public void Move()
 	{
-		//int stepsToMove=1;
-		//if(stepsToMove>0)
-		//{
-		if(kidDirection==AllConstants.KidDirection.KID_WALK_FRONT){
+		
+		if(kidDirection==AllConstants.KID_WALK_FRONT){
 			
 			y+=5;
 		}
@@ -31,23 +32,10 @@ public class Kid extends GameScreenObject{
 			
 		}
 		}
-		//stepsToMove++;
-	//}
+		
 	public Bitmap NextBitmap()
 	{
-		Bitmap bitmapNext = null;
-		if(nextIndex==0)
-		{
-			bitmapNext=resources.drawables.get(nextIndex);
-			nextIndex=1;
-		}
-		else
-		{
-			bitmapNext=resources.drawables.get(nextIndex);
-			nextIndex=0;
-		}
-		
-		return bitmapNext;
+		return GetNextBitmap(kidDirection);		
 	}
 	
 

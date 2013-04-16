@@ -3,19 +3,19 @@ package com.valamburi.henqueen2;
 import android.graphics.Bitmap;
 
 public class Cat extends GameScreenObject {
-	public AllConstants.CatDirection catDirection;
+	public String direction;
 	int nextIndex;
-	Cat(float x,float y,AllConstants.CatDirection catDirection)
+	Cat(float x,float y,String direction)
 	{
 	this.x=x;
 	this.y=y;
 	nextIndex=0;
-	this.catDirection=catDirection;
+	this.direction=direction;
 	}
 	public void Move()
 	{
 		
-			if(catDirection==AllConstants.CatDirection.CAT_FRONT){
+			if(direction.equals(AllConstants.CAT_FRONT)){
 				y+=5;
 				
 			}
@@ -36,21 +36,6 @@ public class Cat extends GameScreenObject {
 	
 	public Bitmap NextBitmap()
 	{
-		Bitmap bitMapNext;
-		if(nextIndex==2)
-		{
-			
-			bitMapNext=resources.drawables.get(nextIndex);
-			nextIndex=3;
-			
-		}
-		else
-		{
-			bitMapNext=resources.drawables.get(nextIndex);
-			nextIndex=2;
-			
-			
-		}
-		return bitMapNext;
+		return GetNextBitmap(direction);
 	}
 }
