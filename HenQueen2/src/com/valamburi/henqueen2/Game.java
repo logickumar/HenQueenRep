@@ -1,7 +1,5 @@
 package com.valamburi.henqueen2;
 
-import java.util.LinkedList;
-
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -48,27 +46,21 @@ public class Game {
 		//GameDrawableList henStandRightList=new GameDrawableList();
 		henStandRightList.add(henStandRightBitmap);
 		hen.resources.drawableListsMap.put(AllConstants.HEN_STAND_FRONT, henStandRightList);
-		
-		
+				
 		//hen stand left
 		Bitmap henStandLeftBitmap=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.henstandleft);
 		GameDrawableList henStandLeftList=new GameDrawableList();
 		henStandLeftList.add(henStandLeftBitmap);
 		hen.resources.drawableListsMap.put(AllConstants.HEN_STAND_BACK, henStandLeftList);
-		
-		
+				
 		//hen walk right
 		Bitmap henWalkRightBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(),R.drawable.henwalkright1);
 		Bitmap henWalkRightBitmap2=BitmapFactory.decodeResource(playScreenActivity.getResources(),R.drawable.henwalkright2);
 		GameDrawableList henWalkRightList=new GameDrawableList();
-		henStandRightList.add(henWalkRightBitmap1);
-		henStandRightList.add(henWalkRightBitmap2);
+		henWalkRightList.add(henWalkRightBitmap1);
+		henWalkRightList.add(henWalkRightBitmap2);
 		hen.resources.drawableListsMap.put(AllConstants.HEN_WALK_FRONT, henWalkRightList);
-		
-		
-		
-		
-		
+					
 		//hen walk left
 		Bitmap henWalkLeftBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.henwalkleft1);
 		Bitmap henWalkLeftBitmap2=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.henwalkleft2);
@@ -77,7 +69,23 @@ public class Game {
 		henWalkLeftList.add(henWalkLeftBitmap2);
 		hen.resources.drawableListsMap.put(AllConstants.HEN_WALK_BACK, henWalkLeftList);
 		
+		//Hen hit front
+		Bitmap henhitFrontBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.henhitright11);
+		Bitmap henhitFrontBitmap2=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.henhitright2);
+		GameDrawableList henhitFrontList=new GameDrawableList();
+		henhitFrontList.add(henhitFrontBitmap1);
+		henhitFrontList.add(henhitFrontBitmap2);
+		henhitFrontList.EnableTrackAnimationCount();
+		hen.resources.drawableListsMap.put(AllConstants.HEN_HIT_FRONT, henhitFrontList);
 		
+		//Hen hit back
+		Bitmap henhitBackBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.henhitleft11);
+		Bitmap henhitBackBitmap2=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.henhitleft2);
+		GameDrawableList henhitBackList=new GameDrawableList();
+		henhitBackList.add(henhitBackBitmap1);
+		henhitBackList.add(henhitBackBitmap2);
+		henhitBackList.EnableTrackAnimationCount();
+		hen.resources.drawableListsMap.put(AllConstants.HEN_HIT_BACK, henhitBackList);
 		
 		//chick
 		chick=new Chick(70,160);
@@ -98,24 +106,21 @@ public class Game {
 		chick.resources.drawableListsMap.put(AllConstants.CHICK_WITH_FOOD, chickBitmapList2);
 		
 		//Cat right
-		cat=new Cat(70,400,AllConstants.CAT_BACK);
+		cat=new Cat(70,400,AllConstants.CAT_WALK_BACK);
 		Bitmap catWalkRightBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.catwalkright1);
 		Bitmap catWalkRightBitmap2=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.catwalkright2);
 		GameDrawableList catWalkRightList=new GameDrawableList();
 		catWalkRightList.add(catWalkRightBitmap1);
 		catWalkRightList.add(catWalkRightBitmap2);
-		cat.resources.drawableListsMap.put(AllConstants.CAT_FRONT, catWalkRightList);
-		
-	
-		
-		
+		cat.resources.drawableListsMap.put(AllConstants.CAT_WALK_FRONT, catWalkRightList);
+				
 		//cat left
 		Bitmap catWalkLeftBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.catwalkleft1);
 		Bitmap catWalkLeftBitmap2=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.catwalkleft2);
 		GameDrawableList catWalkLeftList=new GameDrawableList();
 		catWalkLeftList.add(catWalkLeftBitmap1);
 		catWalkLeftList.add(catWalkLeftBitmap2);
-		cat.resources.drawableListsMap.put(AllConstants.CAT_BACK, catWalkLeftList);
+		cat.resources.drawableListsMap.put(AllConstants.CAT_WALK_BACK, catWalkLeftList);
 		
 		//ant right
 		ant=new Ant(70,10,AllConstants.ANT_FRONT);
@@ -125,8 +130,7 @@ public class Game {
 		antWalkRightList.add(antWalkRightBitmap1);
 		antWalkRightList.add(antWalkRightBitmap2);
 		ant.resources.drawableListsMap.put(AllConstants.ANT_FRONT, antWalkRightList);
-		
-		
+			
 		
 		//ant left
 		Bitmap antWalkLeftBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.antleft1);
@@ -144,9 +148,7 @@ public class Game {
 		antFoodList.add(antFoodBitmap1);
 		antFoodList.add(antFoodBitmap2);
 		antFood.resources.drawableListsMap.put(AllConstants.ANT_FOOD_FRONT, antFoodList);
-		
-		
-		
+				
 	
 		//Crow down right
 		crow=new Crow(300,5,AllConstants.CROW_FRONT);

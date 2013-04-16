@@ -105,19 +105,19 @@ public class GameThread extends Thread implements OnTouchListener,
 		 */
 
 		chick.DoUpdate();
-		canvas.drawBitmap(chick.NextBitmap(), chick.x, chick.y, new Paint());
-  
-		
+		canvas.drawBitmap(chick.NextBitmap(), chick.x, chick.y, new Paint());		
 		
 		cat.DoUpdate();
 		canvas.drawBitmap(cat.NextBitmap(), cat.x, cat.y, new Paint());
-
-		antFood.DoUpdate();
-		canvas.drawBitmap(antFood.NextBitmap(), antFood.x, antFood.y,new Paint());
-
-		ant.DoUpdate();
-		canvas.drawBitmap(ant.NextBitmap(), ant.x, ant.y, new Paint());
-
+		
+		if(ant.visibility)
+		{
+			antFood.DoUpdate();
+			canvas.drawBitmap(antFood.NextBitmap(), antFood.x, antFood.y,new Paint());			
+			
+			ant.DoUpdate();
+			canvas.drawBitmap(ant.NextBitmap(), ant.x, ant.y, new Paint());
+		}
 		crow.DoUpdate();
 		canvas.drawBitmap(crow.NextBitmap(), crow.x, crow.y, new Paint());
 
@@ -131,19 +131,8 @@ public class GameThread extends Thread implements OnTouchListener,
 
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
-		// TODO Auto-generated method stub
+		
 		float touched_x, touched_y;
-		// GestureDetector.SimpleOnGestureListener mGestureDetector =new
-		// GestureDetector.SimpleOnGestureListener()
-		// {
-
-		// @Override
-		// public void onLongPress(MotionEvent e) {
-		// do your tasks here
-
-		// }
-		// };
-
 		int action = event.getAction();
 		Log.d("HEN", "touch handled");
 		touched_x = event.getX();
@@ -151,79 +140,7 @@ public class GameThread extends Thread implements OnTouchListener,
 		Display display = playScreen.getWindowManager().getDefaultDisplay();
 		Point size = new Point();
 		display.getSize(size);
-		// int screenWidth = size.x;
-		// int screenHeight = size.y;
-
-		// if(hen.y>10 && (ant.y && ant.antWidth)
-
-		/*
-		 * 
-		 * float midX=screenWidth/2; float midY=screenHeight/2;
-		 * 
-		 * if(hen.henAction==AllConstants.HenAction.HEN_WALK) {
-		 * if(touched_y<=midY &&
-		 * hen.direction==AllConstants.HenDirection.HEN_FRONT ) {
-		 * hen.direction=AllConstants.HenDirection.HEN_BACK; hen.stepsToMove=0;
-		 * //hen.x=touched_x; //hen.y=touched_y;
-		 * 
-		 * } else if(touched_y>midY &&
-		 * hen.direction==AllConstants.HenDirection.HEN_BACK) {
-		 * hen.direction=AllConstants.HenDirection.HEN_FRONT; hen.stepsToMove=0;
-		 * //hen.x=touched_x; //hen.y=touched_y;
-		 * 
-		 * } } if(hen.henAction==AllConstants.HenAction.HEN_WALK_WITH_FOOD) {
-		 * if(touched_y<=midY &&
-		 * hen.direction==AllConstants.HenDirection.HEN_FRONT ) {
-		 * hen.direction=AllConstants.HenDirection.HEN_BACK; hen.stepsToMove=0;
-		 * //hen.x=touched_x; //hen.y=touched_y;
-		 * 
-		 * } else if(touched_y>midY &&
-		 * hen.direction==AllConstants.HenDirection.HEN_BACK) {
-		 * hen.direction=AllConstants.HenDirection.HEN_FRONT; hen.stepsToMove=0;
-		 * //hen.x=touched_x; //hen.y=touched_y;
-		 * 
-		 * } } if(hen.henAction==AllConstants.HenAction.HEN_EAT_FOOD) {
-		 * if(touched_y<=midY &&
-		 * hen.direction==AllConstants.HenDirection.HEN_FRONT ) {
-		 * hen.direction=AllConstants.HenDirection.HEN_BACK; hen.stepsToMove=0;
-		 * //hen.x=touched_x; //hen.y=touched_y;
-		 * 
-		 * } else if(touched_y>midY &&
-		 * hen.direction==AllConstants.HenDirection.HEN_BACK) {
-		 * hen.direction=AllConstants.HenDirection.HEN_FRONT; hen.stepsToMove=0;
-		 * //hen.x=touched_x; //hen.y=touched_y;
-		 * 
-		 * } }
-		 * 
-		 * if(ant.isTouched()) { if(touched_x>=ant.x && touched_y<=ant.y) {
-		 * 
-		 * } } if(hen.henAction==AllConstants.HenAction.HEN_FLY) {
-		 * if(touched_y<=midY && touched_x<=midX &&
-		 * hen.direction==AllConstants.HenDirection.HEN_FRONT) {
-		 * hen.direction=AllConstants.HenDirection.HEN_BACK; hen.stepsToMove=0;
-		 * //hen.x=touched_x; //hen.y=touched_y; } else if(touched_y>midY &&
-		 * touched_x<=midX && hen.direction==AllConstants.HenDirection.HEN_BACK)
-		 * { hen.direction=AllConstants.HenDirection.HEN_FRONT;
-		 * //hen.x=touched_x; //hen.y=touched_y; } } //if(hen.istouched()){
-		 * if(hen.henAction==AllConstants.HenAction.HEN_EAT_FOOD) {
-		 * 
-		 * if(hen.istouched()){ if(touched_y<=midY &&
-		 * hen.direction==AllConstants.HenDirection.HEN_FRONT ) {
-		 * hen.direction=AllConstants.HenDirection.HEN_BACK;
-		 * 
-		 * //hen.x=touched_x; //hen.y=touched_y;
-		 * 
-		 * } else if(touched_y>midY &&
-		 * hen.direction==AllConstants.HenDirection.HEN_BACK) {
-		 * hen.direction=AllConstants.HenDirection.HEN_FRONT;
-		 * 
-		 * //hen.x=touched_x; //hen.y=touched_y;
-		 * 
-		 * }
-		 * 
-		 * 
-		 * } }
-		 */
+		
 		if (action == MotionEvent.ACTION_DOWN) {
 
 			if (ant.istouched(touched_x, touched_y)) {
@@ -231,46 +148,39 @@ public class GameThread extends Thread implements OnTouchListener,
 				if (hen.hen_endy <= ant.ant_starty) {
 					//hen.direction = AllConstants.HEN_FRONT;
 					hen.henAction = AllConstants.HEN_WALK_FRONT;
+					
 				} else if (hen.hen_starty >= ant.ant_starty) {
 					//hen.direction = AllConstants.HEN_BACK;
 					hen.henAction = AllConstants.HEN_WALK_BACK;
 				}
-			
+				hen.target=AllConstants.HEN_TARGET_ANT;			
 				Log.d("HEN", "Hen Walk assigned");
-
 			} else {
 				Log.d("HEN", "Ant not touched");
 			}
+			
+			if (cat.istouched(touched_x, touched_y)) {
+				Log.d("HEN", "Cat touched");
+				if (hen.hen_endy <= cat.cat_starty) {
+					//hen.direction = AllConstants.HEN_FRONT;
+					hen.henAction = AllConstants.HEN_WALK_FRONT;
+				} else if (hen.hen_starty >= cat.cat_starty) {
+					//hen.direction = AllConstants.HEN_BACK;
+					hen.henAction = AllConstants.HEN_WALK_BACK;
+				}
+				hen.target=AllConstants.HEN_TARGET_CAT;			
+				Log.d("HEN", "Hen Walk assigned");
+				Log.d("HEN", hen.henAction);
 
-			// if(hen.direction.equals(AllConstants.HEN_BACK))
-			// {
-			// hen.y-=10;
-			//
-			// }else if(hen.direction.equals(AllConstants.HEN_FRONT))
-			// {
-			// hen.y+=10;
-			// }
-			//
-			// hen.henAction=AllConstants.HenAction.HEN_WALK;
-			// hen.henAction=AllConstants.HenAction.HEN_EAT_FOOD;
-			// hen.henAction=AllConstants.HenAction.HEN_WALK_WITH_FOOD;
-
-			// mGestureDetector.onLongPress(event);
-		}
-		if (action == MotionEvent.ACTION_MOVE) {
-
-			// hen.x=touched_x;
-			// hen.y=touched_y;
-			/*
-			 * if(hen.x>=touched_x) { hen.x--; }
-			 */
-			// hen.stepsToMove=5;
-
-		}
-
-		// return gestureDetector.onTouchEvent(event);
+				} else {
+				Log.d("HEN", "Cat not touched");
+			}						
+		}	
+		
 		return false;
 	}
+
+	
 
 	@Override
 	public boolean onDown(MotionEvent arg0) {
@@ -284,7 +194,6 @@ public class GameThread extends Thread implements OnTouchListener,
 		// TODO Auto-generated method stub
 		Log.d("HEN", "fling handled");
 		hen.henAction = AllConstants.HEN_FLY;
-
 		return false;
 	}
 

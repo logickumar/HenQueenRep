@@ -14,6 +14,7 @@ public class Hen extends GameScreenObject
 //	public String direction;
 	public String henAction;
 	public String nextHenAction;
+	public String target;
 	
 	//public AllConstants.HenDirection direction;
 	//public AllConstants.HenAction henAction;
@@ -71,6 +72,7 @@ public class Hen extends GameScreenObject
 			
 		Ant ant=game.ant;
 		Chick chick=game.chick;
+		Cat cat=game.cat;
 		
 		bitmap=GetBitmapByIndex(AllConstants.HEN_STAND_FRONT,0);
 		henHeight=bitmap.getHeight();
@@ -82,48 +84,47 @@ public class Hen extends GameScreenObject
 		 hen_endy=hen_starty+henHeight;
 		// Case when Hen Walks
 		
-			if(henAction==AllConstants.HEN_WALK_FRONT)
+		if(henAction==AllConstants.HEN_WALK_FRONT && target.equals(AllConstants.HEN_TARGET_ANT))
 			{
-				if(y<=ant.y && y<=ant.y+ant.antWidth)
-				{
-					y+=5;	
-					Log.d("HEN", "Walking Front");
-					
-				}
-				else
-				{
-				  henAction=AllConstants.HEN_EAT_FOOD_FRONT;
-				 //	ant.visibility=false;
-				//	nextIndex=6;
-					Log.d("HEN", "Eat Front");
-				}
-		    }
-			else if(henAction==AllConstants.HEN_WALK_BACK)
-			{
-				if(y>ant.y && y>ant.y+ant.antWidth)
-				{
-					y-=5;
-					Log.d("HEN", "Walking Back");
-				}
-				else
-				{
-					
-					henAction=AllConstants.HEN_EAT_FOOD_BACK;
-					nextHenAction=AllConstants.HEN_WALK_WITH_FOOD_FRONT;
-				//	nextIndex=8;
-					//ant.visibility=false;
-					Log.d("HEN", "Eat Back");
-				}
-			}
 				
-
-		
+					if(y<=ant.y && y<=ant.y+ant.antWidth)
+					{
+						y+=5;	
+						Log.d("HEN", "Walking Front");
+						
+					}
+					else
+					{
+					  henAction=AllConstants.HEN_EAT_FOOD_FRONT;
+					  nextHenAction=AllConstants.HEN_WALK_WITH_FOOD_BACK;
+					 	ant.visibility=false;
+					//	nextIndex=6;
+						Log.d("HEN", "Eat Front");
+					}
+			}				
+			else if(henAction==AllConstants.HEN_WALK_BACK  && target.equals(AllConstants.HEN_TARGET_ANT))
+				{
+					if(y>ant.y && y>ant.y+ant.antWidth)
+					{
+						y-=5;
+						Log.d("HEN", "Walking Back");
+					}
+					else
+					{
+						
+						henAction=AllConstants.HEN_EAT_FOOD_BACK;
+						ant.visibility=false;
+						nextHenAction=AllConstants.HEN_WALK_WITH_FOOD_FRONT;					
+						Log.d("HEN", "Eat Back");
+					}
+				}
+	
 	// Case when when hen walks with food
 		
-	if(henAction==AllConstants.HEN_WALK_WITH_FOOD_FRONT)
+	if(henAction==AllConstants.HEN_WALK_WITH_FOOD_FRONT )
 	{
 			//if(direction==AllConstants.HEN_FRONT)
-			//{
+			
 				if(y<chick.y && y<chick.chick_endy)
 				{
 					y+=5;
@@ -131,15 +132,14 @@ public class Hen extends GameScreenObject
 				}else
 				{					
 					henAction=AllConstants.HEN_STAND_FRONT;
-					chick.nextChickAction=AllConstants.CHICK_WITH_FOOD;
-				
+					chick.nextChickAction=AllConstants.CHICK_WITH_FOOD;				
 				}
 			
 	}
-			else if(henAction==AllConstants.HEN_WALK_WITH_FOOD_BACK)
+			else if(henAction==AllConstants.HEN_WALK_WITH_FOOD_BACK )
 			{
 				//if(direction==AllConstants.HenDirection.HEN_BACK)
-				//{
+				
 					if(y>chick.y && y>chick.chick_endy)
 					{
 						y-=5;
@@ -151,6 +151,38 @@ public class Hen extends GameScreenObject
 						chick.nextChickAction=AllConstants.CHICK_WITH_FOOD;
 					}
 			}
+	if(henAction==AllConstants.HEN_WALK_FRONT && target.equals(AllConstants.HEN_TARGET_CAT))
+	{
+		if(hen_endy<=cat.y)// && y<=cat.y+cat.catWidth)
+		{
+			y+=5;	
+			Log.d("HEN", "Walking Front");			
+		}
+		else
+		{
+		  henAction=AllConstants.HEN_HIT_FRONT;
+		  nextHenAction=AllConstants.HEN_STAND_FRONT;
+		  cat.action=AllConstants.CAT_WALK_FRONT;		 
+		  Log.d("HEN", "Hit Front");
+		}
+    }
+	else if(henAction==AllConstants.HEN_WALK_BACK && target.equals(AllConstants.HEN_TARGET_CAT))
+	{
+		if(hen_endy>cat.y)// && y>cat.y+cat.catWidth)
+		{
+			y-=5;
+			Log.d("HEN", "Walking Back");
+		}
+		else
+		{			
+			henAction=AllConstants.HEN_HIT_BACK;
+			cat.action=AllConstants.CAT_WALK_BACK;
+			nextHenAction=AllConstants.HEN_STAND_BACK;
+			Log.d("HEN", "Hit Back");
+		}
+	}
+
+			
 			
 		
 //	
@@ -203,109 +235,7 @@ public class Hen extends GameScreenObject
 		{
 			henAction=nextHenAction;	
 			GetCurrentDrawablesList().DisableTrackAnimationCount();
-			
 		}
-		
-//				case HEN_EAT_FOOD:
-//					if(direction==AllConstants.HenDirection.HEN_FRONT)
-//					{
-//						if(nextIndex==6)
-//						{
-//							
-//							nextIndex=7;
-//						}
-//						else if(nextIndex==7)
-//						{
-//							nextIndex=6;
-//							henAction=AllConstants.HenAction.HEN_WALK_WITH_FOOD;
-//						}
-//					
-//					}
-//					else if(direction==AllConstants.HenDirection.HEN_BACK)
-//					{
-//						if(nextIndex==8)
-//						{							
-//							nextIndex=9;
-//						}
-//						else if(nextIndex==9)
-//						{
-//							nextIndex=8;
-//							henAction=AllConstants.HenAction.HEN_WALK_WITH_FOOD;
-//						}
-//					}
-//					break;
-//				case HEN_STAND_WITH_FOOD:
-//					if(direction==AllConstants.HenDirection.HEN_FRONT)						
-//						nextIndex=10;
-//					else
-//						nextIndex=11;					
-//					break;
-					
-//				case HEN_WALK_WITH_FOOD:
-//					if(direction==AllConstants.HenDirection.HEN_FRONT)
-//					{
-//					 if(nextIndex==11)
-//					 {
-//						 
-//						 nextIndex=10;
-//					 }
-//					 else if(nextIndex==10)
-//					 {
-//						 
-//						 nextIndex=11;
-//					 }
-//					}
-//					 else if(direction==AllConstants.HenDirection.HEN_BACK)
-//					 {
-//						 if(nextIndex==13)
-//						 {
-//							
-//							 nextIndex=12;
-//						 }
-//						 else if(nextIndex==12)
-//						 {
-//							
-//							 nextIndex=13;
-//						 }	 
-//						 
-//					 
-//					}
-//					 break;
-//				case HEN_FEED:
-//					//chick.nextIndex=2;
-//					break;
-//				case HEN_FLY:
-//					if(direction==AllConstants.HenDirection.HEN_FRONT)
-//					{
-//						if(nextIndex==10)
-//						{
-//							
-//							nextIndex=11;
-//						}
-//							else{
-//					
-//								nextIndex=10;
-//						}
-//					}
-//					
-//					else if(direction==AllConstants.HenDirection.HEN_BACK)
-//					{
-//						if(nextIndex==12)
-//						{
-//					
-//						nextIndex=13;
-//					}
-//					else
-//					{
-//					
-//						nextIndex=12;
-//					
-//					}
-//			}
-//					break;
-			
-						
-		
 				
 		return bitmapNext;
 		}
@@ -315,7 +245,13 @@ public class Hen extends GameScreenObject
 		
 		return resources.drawableListsMap.get(henAction);
 	}
+
+
+
 	
+		
 	}
+	
+	
 
 
