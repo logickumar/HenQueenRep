@@ -1,6 +1,7 @@
 package com.valamburi.henqueen2;
 
 import java.util.LinkedList;
+import java.util.Random;
 
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -13,6 +14,7 @@ public class Ant extends GameScreenObject {
 	float antWidth,antHeight;
 	Hen hen;
 	
+	
 	Ant(float x,float y,String antDirection)
 	{
 		this.x=x;
@@ -24,25 +26,34 @@ public class Ant extends GameScreenObject {
 	
 		
 	
-	public void Move()
+	public void Move(Game game)
 	{
-		int stepsToMove=1;
-		if(stepsToMove>0)
-		{
-			if(antDirection==AllConstants.ANT_FRONT)
-			{
-				y++;
-			}else
-			{
-				y--;
+		
+		 if(antDirection==AllConstants.ANT_FRONT)
+			{			 
+				y+=5;
+				if(y>game.screenHeight)
+					randomize(game);
+			}else if(antDirection==AllConstants.ANT_BACK)
+			{	
+				y-=5;
+				if(y<0)
+					randomize(game);
 			}
-			stepsToMove++;
-		}
+			
 		
 	}
-	public void DoUpdate()
+	public void DoUpdate(Game game)
 	{
-		Move();
+		Bitmap bitmap;
+		bitmap=GetBitmapByIndex(AllConstants.ANT_FRONT,0);
+		antWidth=bitmap.getWidth();
+		antHeight=bitmap.getHeight();
+		ant_startx=x;
+		ant_starty=y;
+		ant_endx=x+antWidth;
+		ant_endy=y+antHeight;
+		Move(game);
 	}
 	public Bitmap NextBitmap()
 	{
@@ -53,14 +64,7 @@ public class Ant extends GameScreenObject {
 	public boolean istouched(float tx,float ty){
 		// TODO Auto-generated method stub
 		
-		Bitmap bitmap;
-		bitmap=GetBitmapByIndex(AllConstants.ANT_FRONT,0);
-		antWidth=bitmap.getWidth();
-		antHeight=bitmap.getHeight();
-		ant_startx=x;
-		ant_starty=y;
-		ant_endx=x+antWidth;
-		ant_endy=y+antHeight;
+	
 		
 		Log.d("HEN", "Inside Ant istouched");
 		
@@ -70,6 +74,28 @@ public class Ant extends GameScreenObject {
 		}
 		return false;
 		
+		
+	}
+	
+	public void randomize(Game game)
+	{
+		Random rm=new Random();
+		int random=rm.nextInt(300);
+		
+		if(rm.nextInt(100)>50)
+		{			
+			y=game.screenHeight+random;
+			Log.d("nextAnt", "walking back");
+			antDirection=AllConstants.ANT_BACK;			
+			
+		} else 
+		{
+			 
+			y=0-random;
+			Log.d("nextAnt", "walking front");
+			antDirection=AllConstants.ANT_FRONT;				
+		}
+		visibility=true;
 		
 	}
 

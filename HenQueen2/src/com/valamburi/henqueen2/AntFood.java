@@ -20,10 +20,10 @@ public class AntFood extends GameScreenObject{
 		
 		if(antFoodDirection==AllConstants.ANT_FOOD_FRONT)
 		{
-		y++;	
-		}else
+		y+=5;	
+		} else if(antFoodDirection==AllConstants.ANT_FOOD_BACK)
 		{
-			y--;
+			y-=5;
 		}
 	
 	}

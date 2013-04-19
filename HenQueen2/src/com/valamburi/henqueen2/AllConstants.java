@@ -41,9 +41,12 @@ public class AllConstants {
 	
 	public static String HEN_TARGET_CAT="HEN_TARGET_CAT"; // k41
 	public static String HEN_TARGET_ANT="HEN_TARGET_ANT"; // k41
+	public static String HEN_TARGET_KID="HEN_TARGET_KID";
 	
 	public static String CAT_WALK_FRONT="CAT_WALK_FRONT"; 
 	public static String CAT_WALK_BACK ="CAT_WALK_BACK";
+	public static String CAT_TARGET_CHICK="CAT_TARGET_CHICK";
+	public static String CAT_TARGET_NULL="CAT_TARGET_NULL";
 	
 	public static String ANT_FRONT="ANT_FRONT"; 
 	public static String ANT_BACK="ANT_BACK"; 

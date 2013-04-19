@@ -31,12 +31,13 @@ public class GameThread extends Thread implements OnTouchListener,
 	Hen hen = null;
 	Chick chick;
 	Cat cat;
-	Ant ant = null;
+	Ant[] ant = null;
 	AntFood antFood;
 	Crow crow;
 	Kid kid;
 	float x;
 	float y;
+	int i = 4;
 	// boolean touched=false;
 //	GestureDetector gestureDetector;
 
@@ -62,7 +63,7 @@ public class GameThread extends Thread implements OnTouchListener,
 
 	public void run() {
 		int count = 0;
-		while (game.isRunning && count < 150) {
+		while (game.isRunning && count < 1000) {
 			try {
 				Log.d("HEN", "Run");
 				Draw();
@@ -107,17 +108,22 @@ public class GameThread extends Thread implements OnTouchListener,
 		chick.DoUpdate();
 		canvas.drawBitmap(chick.NextBitmap(), chick.x, chick.y, new Paint());		
 		
-		cat.DoUpdate();
+		cat.DoUpdate(game);
 		canvas.drawBitmap(cat.NextBitmap(), cat.x, cat.y, new Paint());
 		
-		if(ant.visibility)
+		for(int i=0;i<4;i++)
 		{
-			antFood.DoUpdate();
-			canvas.drawBitmap(antFood.NextBitmap(), antFood.x, antFood.y,new Paint());			
+		if(ant[i].visibility)
+		{
+						
 			
-			ant.DoUpdate();
-			canvas.drawBitmap(ant.NextBitmap(), ant.x, ant.y, new Paint());
+			ant[i].DoUpdate(game);
+			canvas.drawBitmap(ant[i].NextBitmap(), ant[i].x, ant[i].y, new Paint());
 		}
+		}
+		antFood.DoUpdate();
+		canvas.drawBitmap(antFood.NextBitmap(), antFood.x, antFood.y,new Paint());
+		
 		crow.DoUpdate();
 		canvas.drawBitmap(crow.NextBitmap(), crow.x, crow.y, new Paint());
 
@@ -137,34 +143,51 @@ public class GameThread extends Thread implements OnTouchListener,
 		Log.d("HEN", "touch handled");
 		touched_x = event.getX();
 		touched_y = event.getY();
-		Display display = playScreen.getWindowManager().getDefaultDisplay();
-		Point size = new Point();
-		display.getSize(size);
+	//	Display display = playScreen.getWindowManager().getDefaultDisplay();
+	//	Point size = new Point();
+	//	display.getSize(size);
+		//game.screenwidth=200;
 		
-		if (action == MotionEvent.ACTION_DOWN) {
-
-			if (ant.istouched(touched_x, touched_y)) {
+		if (action == MotionEvent.ACTION_DOWN)
+		{
+          for(int i=0;i<4;i++)
+          {
+			if (ant[i].istouched(touched_x, touched_y))
+			{
 				Log.d("HEN", "Ant touched");
-				if (hen.hen_endy <= ant.ant_starty) {
+				if (hen.hen_endy <= ant[i].ant_starty)
+				{
 					//hen.direction = AllConstants.HEN_FRONT;
 					hen.henAction = AllConstants.HEN_WALK_FRONT;
 					
-				} else if (hen.hen_starty >= ant.ant_starty) {
+				} 
+				else if (hen.hen_starty >= ant[i].ant_starty)
+				{
 					//hen.direction = AllConstants.HEN_BACK;
 					hen.henAction = AllConstants.HEN_WALK_BACK;
 				}
+				hen.targetAntIndex=i;
 				hen.target=AllConstants.HEN_TARGET_ANT;			
 				Log.d("HEN", "Hen Walk assigned");
-			} else {
+				break;
+			} 
+			else 
+			{
 				Log.d("HEN", "Ant not touched");
 			}
+          }
+		
 			
-			if (cat.istouched(touched_x, touched_y)) {
+			if (cat.istouched(touched_x, touched_y))
+			{
 				Log.d("HEN", "Cat touched");
-				if (hen.hen_endy <= cat.cat_starty) {
+				if (hen.hen_endy <= cat.cat_starty)
+				{
 					//hen.direction = AllConstants.HEN_FRONT;
 					hen.henAction = AllConstants.HEN_WALK_FRONT;
-				} else if (hen.hen_starty >= cat.cat_starty) {
+				} 
+				else if (hen.hen_starty >= cat.cat_starty) 
+				{
 					//hen.direction = AllConstants.HEN_BACK;
 					hen.henAction = AllConstants.HEN_WALK_BACK;
 				}
@@ -172,12 +195,40 @@ public class GameThread extends Thread implements OnTouchListener,
 				Log.d("HEN", "Hen Walk assigned");
 				Log.d("HEN", hen.henAction);
 
-				} else {
+			}
+			else 
+			{
 				Log.d("HEN", "Cat not touched");
-			}						
-		}	
+			}	
+          
+		   	
+		if (kid.istouched(touched_x, touched_y))
+		{
+			Log.d("HEN", "kid touched");
+			if (hen.hen_endy <= kid.kid_starty)
+			{
+				//hen.direction = AllConstants.HEN_FRONT;
+				hen.henAction = AllConstants.HEN_WALK_FRONT;
+			} 
+			else if (hen.hen_starty >= kid.kid_starty) 
+			{
+				//hen.direction = AllConstants.HEN_BACK;
+				hen.henAction = AllConstants.HEN_WALK_BACK;
+			}
+			hen.target=AllConstants.HEN_TARGET_KID;			
+			Log.d("HEN", "Hen Walk assigned");
+			Log.d("HEN", hen.henAction);
+
+			} 
+		else 
+		{
+		Log.d("HEN", "kid not touched");
+	    }	
+		}
+	   
 		
 		return false;
+		
 	}
 
 	

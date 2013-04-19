@@ -1,8 +1,13 @@
 package com.valamburi.henqueen2;
 
+import java.util.Random;
+
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
+import android.util.Log;
+import android.view.Display;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -17,10 +22,14 @@ public class Game {
 	public Bitmap bitmapBackground=null;
 	public Chick chick;
 	public Cat cat;
-	public Ant ant;
+	//public Ant ant;
 	public AntFood antFood;
 	public Crow crow;
 	public Kid kid;
+	public int screenwidth,screenHeight;
+	public Ant[] ant;
+	
+	public int i = 0;
 	
 
 	
@@ -29,6 +38,12 @@ public class Game {
 		this.playScreenActivity=playScreenActivity;
 		this.holder=holder;
 		this.surfaceView=surfaceView;
+		Display display = playScreenActivity.getWindowManager().getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		screenwidth=size.x;
+		screenHeight=size.y;
+		Log.d("Game", screenwidth + " " + screenHeight);
 		Initialize();	
 	}
 	
@@ -88,7 +103,7 @@ public class Game {
 		hen.resources.drawableListsMap.put(AllConstants.HEN_HIT_BACK, henhitBackList);
 		
 		//chick
-		chick=new Chick(70,160);
+		chick=new Chick(70,160,AllConstants.CHICK_ANIM);
 		Bitmap chickBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.chicksbitmap1);		
 		Bitmap chickBitmap2=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.chicksbitmap2);
 		GameDrawableList chickBitmapList1=new GameDrawableList();
@@ -123,22 +138,47 @@ public class Game {
 		cat.resources.drawableListsMap.put(AllConstants.CAT_WALK_BACK, catWalkLeftList);
 		
 		//ant right
-		ant=new Ant(70,10,AllConstants.ANT_FRONT);
+		
+		
+		//ant[0]=new Ant(70,10,AllConstants.ANT_FRONT);
+		//ant[1]=new Ant(70,300,AllConstants.ANT_BACK);
+		//ant[2]=new Ant(70,30,AllConstants.ANT_FRONT);
+		//ant[3]=new Ant(70,270,AllConstants.ANT_BACK);
+		
+		
+		//ant[i]=new Ant(70,10,AllConstants.ANT_FRONT);
+		ant=new Ant[4];
 		Bitmap antWalkRightBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.antright1);
 		Bitmap antWalkRightBitmap2=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.antrightmove1);
 		GameDrawableList antWalkRightList=new GameDrawableList();
 		antWalkRightList.add(antWalkRightBitmap1);
 		antWalkRightList.add(antWalkRightBitmap2);
-		ant.resources.drawableListsMap.put(AllConstants.ANT_FRONT, antWalkRightList);
-			
 		
-		//ant left
 		Bitmap antWalkLeftBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.antleft1);
 		Bitmap antWalkLeftBitmap2=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.antleftmove1);
 		GameDrawableList antWalkLeftList=new GameDrawableList();
-		antWalkRightList.add(antWalkLeftBitmap1);
-		antWalkRightList.add(antWalkLeftBitmap2);
-		ant.resources.drawableListsMap.put(AllConstants.ANT_BACK, antWalkLeftList);
+		antWalkLeftList.add(antWalkLeftBitmap1);
+		antWalkLeftList.add(antWalkLeftBitmap2);
+		Random rm=new Random();
+		int random;
+		for(i=0;i<4;i++)
+		{
+			random=rm.nextInt(400);
+			if(rm.nextInt(100)>50)
+			{
+				ant[i]=new Ant(70,0-random,AllConstants.ANT_FRONT);			
+			}
+			else
+			{
+				ant[i]=new Ant(70,screenwidth+random,AllConstants.ANT_BACK);
+			}
+			ant[i].resources.drawableListsMap.put(AllConstants.ANT_FRONT, antWalkRightList);		
+			ant[i].resources.drawableListsMap.put(AllConstants.ANT_BACK, antWalkLeftList);
+		}
+
+		//ant left
+		
+		
 		
 		//Ant food
 		antFood=new AntFood(69,35,AllConstants.ANT_FOOD_FRONT);
@@ -178,10 +218,13 @@ public class Game {
 		kid.resources.drawableListsMap.put(AllConstants.KID_WALK_FRONT, kidFrontBitmapList);
 		
 		
-		//Bitmap kidBitmap3=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.kidwalkleft1);
-		//kid.resources.drawables.add(kidBitmap3);
-		//Bitmap kidBitmap4=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.kidwalkleft2);
-		//kid.resources.drawables.add(kidBitmap4);
+		Bitmap kidBitmap3=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.kidwalkleft1);
+	    Bitmap kidBitmap4=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.kidwalkleft2);
+	    GameDrawableList kidBackBitmapList=new GameDrawableList();
+		kidBackBitmapList.add(kidBitmap3);
+		kidBackBitmapList.add(kidBitmap4);
+		kid.resources.drawableListsMap.put(AllConstants.KID_WALK_BACK, kidBackBitmapList);
+		
 		
 	//hen eat food right
     	Bitmap henEatRightBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.heneatright1);
