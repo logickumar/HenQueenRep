@@ -9,7 +9,8 @@ public class AllConstants {
 //	public enum CrowDirection {CROW_UP,CROW_DOWN };
 //	public enum KidDirection { KID_WALK_FRONT,KID_WALK_BACK };
    // public static String[] henAction={"HEN_STAND","HEN_WALK","HEN_FLY","HEN_EAT_FOOD","HEN_FEED"};
-	
+	public static String WIN_COIN="WIN_COIN";
+	public static int SCORE=0;
 	public static String HEN_FRONT="HEN_FRONT";
 	public static String HEN_BACK="HEN_BACK";
 	
@@ -48,6 +49,7 @@ public class AllConstants {
 	public static String CAT_TARGET_CHICK="CAT_TARGET_CHICK";
 	public static String CAT_TARGET_NULL="CAT_TARGET_NULL";
 	
+	
 	public static String ANT_FRONT="ANT_FRONT"; 
 	public static String ANT_BACK="ANT_BACK"; 
 	public static String ANT_WALK_FRONT="ANT_WALK_FRONT";
@@ -59,7 +61,9 @@ public class AllConstants {
 	public static String CROW_BACK="CROW_BACK";
 	
 	public static String KID_WALK_FRONT="KID_WALK_FRONT";
-	public static String KID_WALK_BACK="KID_WALK_BACK"; 
+	public static String KID_WALK_BACK="KID_WALK_BACK";
+	public static String KID_TARGRT_CHICK="KID_TARGET_CHICK";
+	public static String KID_TARGET_NULL="KID_TARGET_NULL";
 	
 	public static String CHICK_ANIM="CHICK_ANIM";
 	public static String CHICK_WITH_FOOD="CHICK_WITH_FOOD";

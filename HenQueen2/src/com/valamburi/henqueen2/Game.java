@@ -28,8 +28,11 @@ public class Game {
 	public Kid kid;
 	public int screenwidth,screenHeight;
 	public Ant[] ant;
+	public Coin coin;
 	
 	public int i = 0;
+	public ScoreManager scoreManager;
+	public TimerCalScreen timeCalScreen;
 	
 
 	
@@ -49,6 +52,8 @@ public class Game {
 	
 	private void  Initialize()
 	{
+		scoreManager=new ScoreManager();
+		timeCalScreen=new TimerCalScreen(this);
 		//Game
 		isRunning=false;
 		// Background
@@ -137,6 +142,11 @@ public class Game {
 		catWalkLeftList.add(catWalkLeftBitmap2);
 		cat.resources.drawableListsMap.put(AllConstants.CAT_WALK_BACK, catWalkLeftList);
 		
+		coin=new Coin(90,160,AllConstants.WIN_COIN);//AllConstants.HEN_FRONT,
+		Bitmap coinBitmap= BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.coins);
+		GameDrawableList coinList=new GameDrawableList();
+		coinList.add(coinBitmap);
+		coin.resources.drawableListsMap.put(AllConstants.WIN_COIN, coinList);
 		//ant right
 		
 		

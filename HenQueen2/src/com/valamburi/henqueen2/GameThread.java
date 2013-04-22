@@ -7,6 +7,7 @@ package com.valamburi.henqueen2;
 import java.util.LinkedList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -38,6 +39,9 @@ public class GameThread extends Thread implements OnTouchListener,
 	float x;
 	float y;
 	int i = 4;
+	ScoreManager score=null;
+	TimerCalScreen timeCalScreen;
+	
 	// boolean touched=false;
 //	GestureDetector gestureDetector;
 
@@ -57,13 +61,16 @@ public class GameThread extends Thread implements OnTouchListener,
 		kid = game.kid;
 		surfaceViewGame = game.surfaceView;
 		surfaceViewGame.setOnTouchListener(this);
+		timeCalScreen=game.timeCalScreen;
 		// gestureDetector=new GestureDetector(this);
 
 	}
 
 	public void run() {
-		int count = 0;
-		while (game.isRunning && count < 1000) {
+	  int count = 0;
+	//	timeCalScreen.start();
+		while (game.isRunning && count < 1000) 
+			{
 			try {
 				Log.d("HEN", "Run");
 				Draw();
@@ -73,7 +80,14 @@ public class GameThread extends Thread implements OnTouchListener,
 				Log.d("HEN", ex.toString());
 			}
 		}
+	//	timeCalScreen.stop();
+		Log.d("TIME UPS","time ups");
+		Intent scoreScreenIntent=new Intent(playScreen, ScoreScreenActivity.class);		
+		playScreen.startActivity(scoreScreenIntent);
 	}
+
+	
+	
 
 	public void Draw() throws InterruptedException {
 		Canvas canvas = null;
@@ -127,9 +141,10 @@ public class GameThread extends Thread implements OnTouchListener,
 		crow.DoUpdate();
 		canvas.drawBitmap(crow.NextBitmap(), crow.x, crow.y, new Paint());
 
-		kid.DoUpdate();
+		kid.DoUpdate(game);
 		canvas.drawBitmap(kid.NextBitmap(), kid.x, kid.y, new Paint());
 
+		
 		hen.DoUpdate(game);
 		canvas.drawBitmap(hen.NextBitmap(), hen.x, hen.y, new Paint());
 

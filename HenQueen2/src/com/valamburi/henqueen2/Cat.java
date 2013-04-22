@@ -10,6 +10,7 @@ public class Cat extends GameScreenObject {
 	int nextIndex;
 	public float catWidth,catHeight,cat_startx,cat_starty,cat_endx,cat_endy;
 	public String cat_target;
+	//public Chick chick;
 	
 	Cat(float x,float y,String action)
 	{
@@ -21,32 +22,29 @@ public class Cat extends GameScreenObject {
 	}
 	
 	public void Move(Game game)
-	
-	{		
+	{
+	Chick chick=game.chick;
+			
 		/*if(y<=0 || y>=game.screenwidth){
 			cat_target=AllConstants.CAT_TARGET_NULL;
 		}*/
-		if(cat_target==AllConstants.CAT_TARGET_NULL)
-		{
-			Random rm=new Random();
+		
+	/*		Random rm=new Random();
 			float random=rm.nextInt(50);
 			if(y>game.screenwidth)
 			{
 				y+=random;
 				action=AllConstants.CAT_WALK_BACK;
-				cat_target=AllConstants.CAT_TARGET_CHICK;
 				Log.d("nextcat","walking back");
 			}
 			else if(y<0)
 			{
 				y-=random;
 				action=AllConstants.CAT_WALK_FRONT;
-				cat_target=AllConstants.CAT_TARGET_CHICK;
 				Log.d("nextcat","walking front");
-			}
-			Log.d("nextcat","walking");
-			//cat_target=AllConstants.CAT_TARGET_CHICK;
-		}
+			}*/
+			
+		
 		
 			if(action.equals(AllConstants.CAT_WALK_FRONT))
 			{
@@ -56,11 +54,27 @@ public class Cat extends GameScreenObject {
 			{
 				y-=5;			
 			}
+			if(cat_target.equals(AllConstants.CAT_TARGET_CHICK))
+			{
+				
+				if((cat_starty>=chick.y && cat_starty<=chick.chick_endy) || (cat_endy>=chick.y && cat_endy<=chick.chick_endy))
+				 {
+					 game.isRunning=false;
+				 }
+			}
 		
 	}
 		
 	public void DoUpdate(Game game)
 	{
+		Bitmap bitmap;
+		bitmap=GetBitmapByIndex(AllConstants.CAT_WALK_FRONT,0);
+		catWidth=bitmap.getWidth();
+		catHeight=bitmap.getHeight();
+		cat_startx=x;
+		cat_starty=y;
+		cat_endx=x+catWidth;
+		cat_endy=y+catHeight;
 		Move(game);
 	}
 	
@@ -71,14 +85,7 @@ public class Cat extends GameScreenObject {
 	
 	public boolean istouched(float tx,float ty)
 	{   
-		Bitmap bitmap;
-		bitmap=GetBitmapByIndex(AllConstants.CAT_WALK_FRONT,0);
-		catWidth=bitmap.getWidth();
-		catHeight=bitmap.getHeight();
-		cat_startx=x;
-		cat_starty=y;
-		cat_endx=x+catWidth;
-		cat_endy=y+catHeight;
+		
 		Log.d("HEN", "Inside Cat istouched");
 		if(tx>=cat_startx && tx<=cat_endx && ty>=cat_starty && ty<=cat_endy)
 		{

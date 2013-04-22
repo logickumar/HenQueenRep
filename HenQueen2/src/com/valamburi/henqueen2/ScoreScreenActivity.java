@@ -15,30 +15,24 @@ public class ScoreScreenActivity extends Activity {
 	TextView value;
     ImageButton playAgain,home;
     Intent playScreenIntent,homeScreenIntent;
+    
    
-   /* int score=0;
-   
-	public ScoreScreenActivity(Hen hen)
-	{
-		score=0;
-	}*/
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         getActionBar().hide();
 		setContentView(R.layout.activity_score_screen);
 		value=(TextView)findViewById(R.id.scoreValue);
-		//add(score);
+		scoreButton=findViewById(R.id.imgScore);
 		
+		value.setText(String.valueOf(AllConstants.SCORE));
+		
+	
 		//playAgain=(ImageButton)findViewById(R.id.imageButton1);
 		//playAgain=(ImageButton)findViewById(R.id.imageButton2);
 		 addListener();
 	}
-	public void add(int score)
-	{
-		score=score+10;
-	}
-
+	
 	private void addListener() {
 		// TODO Auto-generated method stub
 		home=(ImageButton)findViewById(R.id.homeButton);
@@ -64,16 +58,15 @@ public class ScoreScreenActivity extends Activity {
 			}
 			
 		});
-		scoreButton=findViewById(R.id.imgScore);
-		scoreButton.setOnClickListener(new OnClickListener(){
+		
+		/*scoreButton.setOnClickListener(new OnClickListener(){
 
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				//value.setText(score);
+				
 			}
-			
-		});
+		});*/
 	}
 
 	@Override

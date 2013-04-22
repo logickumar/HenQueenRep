@@ -39,7 +39,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		Intent playScreenIntent=new Intent(this,ScoreScreenActivity.class);
+		Intent playScreenIntent=new Intent(this,PlayScreenctivity.class);
 	    v.startAnimation(startButtonAnim);
 	    startButtonAnim.setAnimationListener(new StartActivityAfterAnimationAndSound(this,playScreenIntent,R.raw.applause));
         		
