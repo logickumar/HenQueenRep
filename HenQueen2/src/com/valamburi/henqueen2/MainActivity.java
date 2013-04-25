@@ -1,7 +1,9 @@
 package com.valamburi.henqueen2;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -10,9 +12,11 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+@SuppressLint("NewApi")
 public class MainActivity extends Activity implements OnClickListener {
     View startButton;
     Animation startButtonAnim;
+    MediaPlayer music;
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +26,9 @@ public class MainActivity extends Activity implements OnClickListener {
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         getActionBar().hide();
         setContentView(R.layout.activity_main);
-       
+       music=MediaPlayer.create(this, R.raw.startmusic);
+       music.start();
+      // buttonSound=MediaPlayer.create(this, R.raw.buttonclickmusic);
         // Start Button
         startButton=findViewById(R.id.imgStartButton);
 		startButton.setOnClickListener(this);
@@ -41,8 +47,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		Intent playScreenIntent=new Intent(this,PlayScreenctivity.class);
 	    v.startAnimation(startButtonAnim);
-	    startButtonAnim.setAnimationListener(new StartActivityAfterAnimationAndSound(this,playScreenIntent,R.raw.applause));
-        		
+	    startButtonAnim.setAnimationListener(new StartActivityAfterAnimationAndSound(this,playScreenIntent, R.raw.buttonsound));
+        music.stop();
+       // buttonSound.start();
 	}
 	
 	

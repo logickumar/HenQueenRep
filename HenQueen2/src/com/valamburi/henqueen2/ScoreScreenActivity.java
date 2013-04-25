@@ -1,5 +1,6 @@
 package com.valamburi.henqueen2;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -24,6 +25,7 @@ public class ScoreScreenActivity extends Activity {
     Intent playScreenIntent,homeScreenIntent;
     
     int[] scores={ R.drawable.score0,R.drawable.score1,R.drawable.score2,R.drawable.score3,R.drawable.score4,R.drawable.score5,R.drawable.score6,R.drawable.score7,R.drawable.score8,R.drawable.score9 };
+    MediaPlayer tone,music;
   //  Bitmap bitmap=BitmapFactory.decodeResource(getResources(), scores[AllConstants.SCORE]);
     
 	/* (non-Javadoc)
@@ -35,19 +37,19 @@ public class ScoreScreenActivity extends Activity {
 		getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         getActionBar().hide();
 		setContentView(R.layout.activity_score_screen);
-	   
-		 
-			
+	    tone=MediaPlayer.create(this, R.raw.buttonclickmusic);
+		music=MediaPlayer.create(this, R.raw.startmusic);
+		music.start();	
 		scoreButton=findViewById(R.id.imgScore);
 		scoreValue=(ImageView)findViewById(R.id.imgScoreValue1);
 		scoreValue1=(ImageView)findViewById(R.id.imgScoreValue2);
 		scoreValue2=(ImageView)findViewById(R.id.imgScoreValue3);
 		int a=AllConstants.SCORE/10;
 		int b=a/10;
-		int c=b/10;
+		//int c=b/10;
 		int x=AllConstants.SCORE%10;
-	    int y=b%10;
-	    int z=c%10;
+	    int y=a%10;
+	    int z=b%10;
 		 Bitmap bitmapx=BitmapFactory.decodeResource(getResources(), scores[x]);
 		 Bitmap bitmapy=BitmapFactory.decodeResource(getResources(), scores[y]);
 		 Bitmap bitmapz=BitmapFactory.decodeResource(getResources(), scores[z]);
@@ -55,9 +57,9 @@ public class ScoreScreenActivity extends Activity {
 		  Log.d("Scorey",y + ""); 
 		  Log.d("Scorez",z + ""); 
 		 
-		 ((ImageView) scoreValue).setImageBitmap(bitmapx);
+		 ((ImageView) scoreValue).setImageBitmap(bitmapz);
 		 ((ImageView) scoreValue1).setImageBitmap(bitmapy);
-		 ((ImageView) scoreValue2).setImageBitmap(bitmapz);
+		 ((ImageView) scoreValue2).setImageBitmap(bitmapx);
 		  
 	    
 		
@@ -72,6 +74,8 @@ public class ScoreScreenActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				music.stop();
+				tone.start();
 				Intent homeScreenIntent=new Intent(getBaseContext(),MainActivity.class);
 				startActivity(homeScreenIntent);
 			}
@@ -83,6 +87,8 @@ public class ScoreScreenActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				music.stop();
+				tone.start();
 				Intent playScreenIntent=new Intent(getBaseContext(), PlayScreenctivity.class);
 				startActivity(playScreenIntent);
 				

@@ -75,6 +75,7 @@ public class Kid extends GameScreenObject{
 			 {
 				Log.d("KID", "Inside chick & kid collision condition");
 				 game.isRunning=false;
+				 game.gameThread.soundManager.musicPlayer.stop();
 			 }
 		}else if(kid_target.equals(AllConstants.KID_TARGET_NULL))
 		{

@@ -42,13 +42,17 @@
                  android:src="@drawable/imgplayagain" />
        
         </LinearLayout>
-  
+  <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="100dp"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:layout_gravity="center" >   
   <ImageView
             android:id="@+id/imgScoreValue1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:clickable="true"
+            android:layout_gravity="top"
             android:contentDescription="@string/scorevalue"
             android:scaleType="center"
           
@@ -57,8 +61,7 @@
             android:id="@+id/imgScoreValue2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:clickable="true"
+            android:layout_gravity="top"
             android:contentDescription="@string/scorevalue1"
             android:scaleType="center"
           
@@ -68,11 +71,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-            android:clickable="true"
             android:contentDescription="@string/scorevalue2"
             android:scaleType="center"
           
             />
+  </LinearLayout>
         <ImageView
             android:id="@+id/imgScore"
             android:layout_width="wrap_content"

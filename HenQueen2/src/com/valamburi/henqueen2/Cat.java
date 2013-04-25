@@ -47,6 +47,7 @@ public class Cat extends GameScreenObject {
 				if((cat_starty+8>=chick.y && cat_starty+8<=chick.chick_endy) || (cat_endy>=chick.y && cat_endy<=chick.chick_endy))
 				 {
 					 game.isRunning=false;
+					 game.gameThread.soundManager.musicPlayer.stop();
 				 }
 			}
 			else if(cat_target==AllConstants.CAT_TARGET_NULL)

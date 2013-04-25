@@ -132,7 +132,7 @@ public class Game {
 		chickBitmapList2.add(chickBitmap4);
 		chickBitmapList2.EnableTrackAnimationCount();
 		chick.resources.drawableListsMap.put(AllConstants.CHICK_WITH_FOOD, chickBitmapList2);
-		//chick.resources.playables.put(AllConstants.CHICK_WITH_FOOD, R.raw.chicksound);
+		chick.resources.playables.put(AllConstants.CHICK_WITH_FOOD, R.raw.chicksound);
 		
 		//Cat right
 		cat=new Cat(70,400,AllConstants.CAT_WALK_BACK);
@@ -142,7 +142,7 @@ public class Game {
 		catWalkRightList.add(catWalkRightBitmap1);
 		catWalkRightList.add(catWalkRightBitmap2);
 		cat.resources.drawableListsMap.put(AllConstants.CAT_WALK_FRONT, catWalkRightList);
-		//cat.resources.playables.put(AllConstants.CAT_WALK_FRONT, R.raw.catsound);
+		cat.resources.playables.put(AllConstants.CAT_WALK_FRONT, R.raw.catsound);
 				
 		//cat left
 		Bitmap catWalkLeftBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.catwalkleft1);
@@ -152,8 +152,9 @@ public class Game {
 		catWalkLeftList.add(catWalkLeftBitmap2);
 		cat.resources.drawableListsMap.put(AllConstants.CAT_WALK_BACK, catWalkLeftList);
 		
+		
 		coin=new Coin(150,160,AllConstants.COIN_NOT_START);
-		Bitmap coinBitmap= BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.coinimg1);
+		Bitmap coinBitmap= BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.goldcoin);
 		GameDrawableList coinList=new GameDrawableList();
 		coinList.add(coinBitmap);
 		coin.resources.drawableListsMap.put(AllConstants.WIN_COIN, coinList);
@@ -245,20 +246,6 @@ public class Game {
 		henWalkFoodLeftList.add(henWalkFoodLeftBitmap2);
 		hen.resources.drawableListsMap.put(AllConstants.HEN_WALK_WITH_FOOD_BACK, henWalkFoodLeftList);
 		
-		//hen fly
-		Bitmap henFlyFrontBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.henjumpright1);
-		Bitmap henFlyFrontBitmap2=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.henjumpright2);
-		GameDrawableList henFlyFrontList=new GameDrawableList();
-		henFlyFrontList.add(henFlyFrontBitmap1);
-		henFlyFrontList.add(henFlyFrontBitmap2);
-		hen.resources.drawableListsMap.put(AllConstants.HEN_FLY_FRONT, henFlyFrontList);
-		
-		Bitmap henFlyBackBitmap3=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.henjumpleft1);
-		Bitmap henFlyBackBitmap4=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.henjumpleft2);
-		GameDrawableList henFlyBackList=new GameDrawableList();
-		henFlyBackList.add(henFlyBackBitmap3);
-		henFlyBackList.add(henFlyBackBitmap4);
-		hen.resources.drawableListsMap.put(AllConstants.HEN_FLY_BACK, henFlyFrontList);
 		
 		
 	}

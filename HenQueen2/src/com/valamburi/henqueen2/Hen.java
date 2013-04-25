@@ -120,13 +120,13 @@ public class Hen extends GameScreenObject
 				{					
 					henAction=AllConstants.HEN_STAND_FRONT;
 					chick.nextChickAction=AllConstants.CHICK_WITH_FOOD;
-					// game.gameThread.soundQueue.add(resources.playables.get(chick.nextChickAction));
+					gameThread.soundQueue.add(resources.playables.get(chick.nextChickAction));
 					Log.d("chick","chick_with_food");
 					
 					scoreManager.add(1);
 					coin.visibility=true;
 					coin.action=AllConstants.WIN_COIN;
-					
+					gameThread.soundQueue.add(resources.playables.get(coin.action));
 					Log.d("coin", "win_coin");
 				}
 			
@@ -143,9 +143,10 @@ public class Hen extends GameScreenObject
 					{
 						henAction=AllConstants.HEN_STAND_BACK;
 						chick.nextChickAction=AllConstants.CHICK_WITH_FOOD;
-						// game.gameThread.soundQueue.add(resources.playables.get(chick.nextChickAction));
+						gameThread.soundQueue.add(resources.playables.get(chick.nextChickAction));
 					    scoreManager.add(1);
 					    coin.action=AllConstants.WIN_COIN;
+					    gameThread.soundQueue.add(resources.playables.get(coin.action));
 					    Log.d("coin", "win_coin");
 					}
 			}
@@ -163,10 +164,15 @@ public class Hen extends GameScreenObject
 		  henAction=AllConstants.HEN_HIT_FRONT;
 		  gameThread.soundQueue.add(resources.playables.get(henAction));
 		  Log.d("HEN", "Hit Front");
+		  scoreManager.add(1);
+		  coin.visibility=true;
+		  coin.action=AllConstants.WIN_COIN;
+		  gameThread.soundQueue.add(resources.playables.get(coin.action));
+		  Log.d("coin", "win_coin");
 		  nextHenAction=AllConstants.HEN_STAND_FRONT;
 		  //cat.cat_target=AllConstants.CAT_TARGET_CHICK;
 		  cat.action=AllConstants.CAT_WALK_FRONT;
-		 // game.gameThread.soundQueue.add(resources.playables.get(cat.action));
+		  gameThread.soundQueue.add(resources.playables.get(cat.action));
 		  cat.cat_target=AllConstants.CAT_TARGET_NULL;
 		 
 		  //scoreManager.add(10);
@@ -187,8 +193,14 @@ public class Hen extends GameScreenObject
 			henAction=AllConstants.HEN_HIT_BACK;
 			gameThread.soundQueue.add(resources.playables.get(henAction));
 			Log.d("HEN", "Hit Back");
+			scoreManager.add(1);
+			coin.visibility=true;
+			coin.action=AllConstants.WIN_COIN;
+			gameThread.soundQueue.add(resources.playables.get(coin.action));
+			Log.d("coin", "win_coin");
 			nextHenAction=AllConstants.HEN_STAND_BACK;
 			cat.action=AllConstants.CAT_WALK_BACK;
+			//gameThread.soundQueue.add(resources.playables.get(cat.action));
 			cat.cat_target=AllConstants.CAT_TARGET_NULL;
 			
 			// score.add(10);
@@ -208,10 +220,15 @@ public class Hen extends GameScreenObject
 		  henAction=AllConstants.HEN_HIT_FRONT;
 		  gameThread.soundQueue.add(resources.playables.get(henAction));
 		  Log.d("HEN", "Hit Front");
+		  scoreManager.add(1);
+		  coin.visibility=true;
+		  coin.action=AllConstants.WIN_COIN;
+		  gameThread.soundQueue.add(resources.playables.get(coin.action));
+		  Log.d("coin", "win_coin");
 		  nextHenAction=AllConstants.HEN_STAND_FRONT;
 		  kid.action=AllConstants.KID_WALK_FRONT;
 		  kid.kid_target=AllConstants.KID_TARGET_NULL;
-		  scoreManager.add(1);
+		 
 		 
 		}
     }
@@ -230,10 +247,15 @@ public class Hen extends GameScreenObject
 			henAction=AllConstants.HEN_HIT_BACK;
 			gameThread.soundQueue.add(resources.playables.get(henAction));
 			Log.d("HEN", "Hit Back");
+			scoreManager.add(1);
+			coin.visibility=true;
+			coin.action=AllConstants.WIN_COIN;
+			gameThread.soundQueue.add(resources.playables.get(coin.action));
+			Log.d("coin", "win_coin");
 			kid.action=AllConstants.KID_WALK_BACK;
 			nextHenAction=AllConstants.HEN_STAND_BACK;
 			kid.kid_target=AllConstants.KID_TARGET_NULL;
-			scoreManager.add(1);
+			
 		}
 	}
 
