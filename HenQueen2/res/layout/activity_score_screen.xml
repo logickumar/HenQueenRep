@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <ImageView 
         android:id="@+id/scoreimgBackground"
-        android:src="@drawable/imgscorebackground"
+        android:src="@drawable/scorebackgroundimg"
         android:adjustViewBounds="true"
         android:layout_gravity="center_vertical"
         android:scaleType="fitXY"
@@ -42,16 +42,36 @@
                  android:src="@drawable/imgplayagain" />
        
         </LinearLayout>
-  <TextView
-            android:id="@+id/scoreValue"
-            android:layout_width="50dp"
-            android:layout_height="200dp"
+  
+  <ImageView
+            android:id="@+id/imgScoreValue1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:clickable="true"
             android:contentDescription="@string/scorevalue"
-            android:enabled="true"
-            android:focusable="true"
-            android:text="@string/scorevalue"
-            android:textStyle="bold"
+            android:scaleType="center"
+          
+            />
+  <ImageView
+            android:id="@+id/imgScoreValue2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:contentDescription="@string/scorevalue1"
+            android:scaleType="center"
+          
+            />
+  <ImageView
+            android:id="@+id/imgScoreValue3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:clickable="true"
+            android:contentDescription="@string/scorevalue2"
+            android:scaleType="center"
+          
             />
         <ImageView
             android:id="@+id/imgScore"

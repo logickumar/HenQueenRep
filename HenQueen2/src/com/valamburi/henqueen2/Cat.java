@@ -29,20 +29,7 @@ public class Cat extends GameScreenObject {
 			cat_target=AllConstants.CAT_TARGET_NULL;
 		}*/
 		
-	/*		Random rm=new Random();
-			float random=rm.nextInt(50);
-			if(y>game.screenwidth)
-			{
-				y+=random;
-				action=AllConstants.CAT_WALK_BACK;
-				Log.d("nextcat","walking back");
-			}
-			else if(y<0)
-			{
-				y-=random;
-				action=AllConstants.CAT_WALK_FRONT;
-				Log.d("nextcat","walking front");
-			}*/
+	
 			
 		
 		
@@ -57,10 +44,29 @@ public class Cat extends GameScreenObject {
 			if(cat_target.equals(AllConstants.CAT_TARGET_CHICK))
 			{
 				
-				if((cat_starty>=chick.y && cat_starty<=chick.chick_endy) || (cat_endy>=chick.y && cat_endy<=chick.chick_endy))
+				if((cat_starty+8>=chick.y && cat_starty+8<=chick.chick_endy) || (cat_endy>=chick.y && cat_endy<=chick.chick_endy))
 				 {
 					 game.isRunning=false;
 				 }
+			}
+			else if(cat_target==AllConstants.CAT_TARGET_NULL)
+			{
+				Random rm=new Random();
+				float random=rm.nextInt(300);
+				if(action==AllConstants.CAT_WALK_FRONT && cat_starty> game.screenwidth+100)
+				{
+					y= game.screenwidth+100 + random;
+					action=AllConstants.CAT_WALK_BACK;
+					cat_target=AllConstants.CAT_TARGET_CHICK;
+					Log.d("nextcat","walking back");
+				}
+				else if(action==AllConstants.CAT_WALK_BACK && cat_endy<-100)					
+				{
+					y=0-100-random;
+					cat_target=AllConstants.CAT_TARGET_CHICK;
+					action=AllConstants.CAT_WALK_FRONT;
+					Log.d("nextcat","walking front");
+				}
 			}
 		
 	}

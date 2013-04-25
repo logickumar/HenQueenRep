@@ -14,5 +14,7 @@
     <string name="playagain">playagain</string>
     <string name="home">home</string>
     <string name="henqueen">henqueen</string>
+    <string name="scorevalue1">scorevalue1</string>
+    <string name="scorevalue2">scorevalue2</string>
 
 </resources>

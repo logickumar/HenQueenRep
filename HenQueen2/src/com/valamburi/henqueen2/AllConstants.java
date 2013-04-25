@@ -8,7 +8,7 @@ public class AllConstants {
 //	public enum AntFoodDirection {ANT_FOOD_FRONT,ANT_FOOD_BACK };
 //	public enum CrowDirection {CROW_UP,CROW_DOWN };
 //	public enum KidDirection { KID_WALK_FRONT,KID_WALK_BACK };
-   // public static String[] henAction={"HEN_STAND","HEN_WALK","HEN_FLY","HEN_EAT_FOOD","HEN_FEED"};
+   public static String COIN_NOT_START="COIN_NOT_START";
 	public static String WIN_COIN="WIN_COIN";
 	public static int SCORE=0;
 	public static String HEN_FRONT="HEN_FRONT";
@@ -40,8 +40,8 @@ public class AllConstants {
 	public static String HEN_HIT_FRONT="HEN_HIT_FRONT";
 	public static String HEN_HIT_BACK="HEN_HIT_BACK";
 	
-	public static String HEN_TARGET_CAT="HEN_TARGET_CAT"; // k41
-	public static String HEN_TARGET_ANT="HEN_TARGET_ANT"; // k41
+	public static String HEN_TARGET_CAT="HEN_TARGET_CAT";
+	public static String HEN_TARGET_ANT="HEN_TARGET_ANT"; 
 	public static String HEN_TARGET_KID="HEN_TARGET_KID";
 	
 	public static String CAT_WALK_FRONT="CAT_WALK_FRONT"; 
@@ -54,26 +54,18 @@ public class AllConstants {
 	public static String ANT_BACK="ANT_BACK"; 
 	public static String ANT_WALK_FRONT="ANT_WALK_FRONT";
 	public static String ANT_WALK_BACK="ANT_WALK_BACK";
-	public static String ANT_FOOD_FRONT="ANT_FOOD_FRONT";
-	public static String ANT_FOOD_BACK="ANT_FOOD_BACK";
 	
-	public static String CROW_FRONT="CROW_FRONT"; 
-	public static String CROW_BACK="CROW_BACK";
+	
+	
 	
 	public static String KID_WALK_FRONT="KID_WALK_FRONT";
 	public static String KID_WALK_BACK="KID_WALK_BACK";
-	public static String KID_TARGRT_CHICK="KID_TARGET_CHICK";
+	public static String KID_TARGET_CHICK="KID_TARGET_CHICK";
 	public static String KID_TARGET_NULL="KID_TARGET_NULL";
 	
 	public static String CHICK_ANIM="CHICK_ANIM";
 	public static String CHICK_WITH_FOOD="CHICK_WITH_FOOD";
-	//public static int HEN_WALKING;
-	//public static int HEN_STANDING;
-	//public enum  HEN_FRONT=0;
-	//public enum  HEN_BACK=0;
 	
-	//public static String HEN_DOWN="down";
-	//public static String HEN_UP="up";
 	
 
 }

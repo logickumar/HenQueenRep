@@ -2,6 +2,7 @@ package com.valamburi.henqueen2;
 
 import java.util.Random;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,8 +24,8 @@ public class Game {
 	public Chick chick;
 	public Cat cat;
 	//public Ant ant;
-	public AntFood antFood;
-	public Crow crow;
+	
+	
 	public Kid kid;
 	public int screenwidth,screenHeight;
 	public Ant[] ant;
@@ -34,8 +35,10 @@ public class Game {
 	public ScoreManager scoreManager;
 	public TimerCalScreen timeCalScreen;
 	
+	
 
 	
+	@SuppressLint("NewApi")
 	Game(Activity playScreenActivity,SurfaceHolder holder,SurfaceView surfaceView)
 	{
 		this.playScreenActivity=playScreenActivity;
@@ -80,6 +83,7 @@ public class Game {
 		henWalkRightList.add(henWalkRightBitmap1);
 		henWalkRightList.add(henWalkRightBitmap2);
 		hen.resources.drawableListsMap.put(AllConstants.HEN_WALK_FRONT, henWalkRightList);
+		hen.resources.playables.put(AllConstants.HEN_WALK_FRONT, R.raw.hensound);
 					
 		//hen walk left
 		Bitmap henWalkLeftBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.henwalkleft1);
@@ -88,6 +92,7 @@ public class Game {
 		henWalkLeftList.add(henWalkLeftBitmap1);
 		henWalkLeftList.add(henWalkLeftBitmap2);
 		hen.resources.drawableListsMap.put(AllConstants.HEN_WALK_BACK, henWalkLeftList);
+		hen.resources.playables.put(AllConstants.HEN_WALK_BACK, R.raw.hensound);
 		
 		//Hen hit front
 		Bitmap henhitFrontBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.henhitright11);
@@ -97,6 +102,8 @@ public class Game {
 		henhitFrontList.add(henhitFrontBitmap2);
 		henhitFrontList.EnableTrackAnimationCount();
 		hen.resources.drawableListsMap.put(AllConstants.HEN_HIT_FRONT, henhitFrontList);
+		hen.resources.playables.put(AllConstants.HEN_HIT_FRONT, R.raw.henhitsound);
+		//soundQueue.add(cat.resources.playables.get(cat.action));
 		
 		//Hen hit back
 		Bitmap henhitBackBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.henhitleft11);
@@ -106,6 +113,7 @@ public class Game {
 		henhitBackList.add(henhitBackBitmap2);
 		henhitBackList.EnableTrackAnimationCount();
 		hen.resources.drawableListsMap.put(AllConstants.HEN_HIT_BACK, henhitBackList);
+		hen.resources.playables.put(AllConstants.HEN_HIT_BACK, R.raw.henhitsound);
 		
 		//chick
 		chick=new Chick(70,160,AllConstants.CHICK_ANIM);
@@ -124,6 +132,7 @@ public class Game {
 		chickBitmapList2.add(chickBitmap4);
 		chickBitmapList2.EnableTrackAnimationCount();
 		chick.resources.drawableListsMap.put(AllConstants.CHICK_WITH_FOOD, chickBitmapList2);
+		//chick.resources.playables.put(AllConstants.CHICK_WITH_FOOD, R.raw.chicksound);
 		
 		//Cat right
 		cat=new Cat(70,400,AllConstants.CAT_WALK_BACK);
@@ -133,6 +142,7 @@ public class Game {
 		catWalkRightList.add(catWalkRightBitmap1);
 		catWalkRightList.add(catWalkRightBitmap2);
 		cat.resources.drawableListsMap.put(AllConstants.CAT_WALK_FRONT, catWalkRightList);
+		//cat.resources.playables.put(AllConstants.CAT_WALK_FRONT, R.raw.catsound);
 				
 		//cat left
 		Bitmap catWalkLeftBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.catwalkleft1);
@@ -142,21 +152,13 @@ public class Game {
 		catWalkLeftList.add(catWalkLeftBitmap2);
 		cat.resources.drawableListsMap.put(AllConstants.CAT_WALK_BACK, catWalkLeftList);
 		
-		coin=new Coin(90,160,AllConstants.WIN_COIN);//AllConstants.HEN_FRONT,
-		Bitmap coinBitmap= BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.coins);
+		coin=new Coin(150,160,AllConstants.COIN_NOT_START);
+		Bitmap coinBitmap= BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.coinimg1);
 		GameDrawableList coinList=new GameDrawableList();
 		coinList.add(coinBitmap);
 		coin.resources.drawableListsMap.put(AllConstants.WIN_COIN, coinList);
-		//ant right
+		coin.resources.playables.put(AllConstants.WIN_COIN, R.raw.coinsound);
 		
-		
-		//ant[0]=new Ant(70,10,AllConstants.ANT_FRONT);
-		//ant[1]=new Ant(70,300,AllConstants.ANT_BACK);
-		//ant[2]=new Ant(70,30,AllConstants.ANT_FRONT);
-		//ant[3]=new Ant(70,270,AllConstants.ANT_BACK);
-		
-		
-		//ant[i]=new Ant(70,10,AllConstants.ANT_FRONT);
 		ant=new Ant[4];
 		Bitmap antWalkRightBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.antright1);
 		Bitmap antWalkRightBitmap2=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.antrightmove1);
@@ -190,33 +192,6 @@ public class Game {
 		
 		
 		
-		//Ant food
-		antFood=new AntFood(69,35,AllConstants.ANT_FOOD_FRONT);
-		Bitmap antFoodBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.antfood);
-		Bitmap antFoodBitmap2=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.antfoodsss);
-		GameDrawableList antFoodList=new GameDrawableList();
-		antFoodList.add(antFoodBitmap1);
-		antFoodList.add(antFoodBitmap2);
-		antFood.resources.drawableListsMap.put(AllConstants.ANT_FOOD_FRONT, antFoodList);
-				
-	
-		//Crow down right
-		crow=new Crow(300,5,AllConstants.CROW_FRONT);
-		Bitmap crowBitmap1=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.crowrightimg1);
-        Bitmap crowBitmap2=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.crowmoveright1);
-        GameDrawableList crowFrontBitmapList=new GameDrawableList();
-		crowFrontBitmapList.add(crowBitmap1);
-		crowFrontBitmapList.add(crowBitmap2);
-		crow.resources.drawableListsMap.put(AllConstants.CROW_FRONT, crowFrontBitmapList);
-    	
-		
-		/*Bitmap crowBitmap3=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.crowleftimg);
-		Bitmap crowBitmap4=BitmapFactory.decodeResource(playScreenActivity.getResources(), R.drawable.crowmoveleft);
-		GameDrawableList crowBackBitmapList=new GameDrawableList();
-		crowBackBitmapList.add(crowBitmap1);
-		crowDownBitmapList.add(crowBitmap2);
-		hen.resources.drawables.put(AllConstants.CROW_FRONT, crowDownBitmapList);*/
-    	
 		
 		//Kid
 		kid=new Kid(70,15,AllConstants.KID_WALK_FRONT);

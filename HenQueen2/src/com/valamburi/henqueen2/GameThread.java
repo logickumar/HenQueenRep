@@ -13,17 +13,14 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.Log;
-import android.view.Display;
-import android.view.GestureDetector;
-import android.view.GestureDetector.OnGestureListener;
+
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
-public class GameThread extends Thread implements OnTouchListener,
-		OnGestureListener {
+public class GameThread extends Thread implements OnTouchListener {
 
 	Game game = null;
 	SurfaceHolder holder;
@@ -33,15 +30,17 @@ public class GameThread extends Thread implements OnTouchListener,
 	Chick chick;
 	Cat cat;
 	Ant[] ant = null;
-	AntFood antFood;
-	Crow crow;
+	SoundManager soundManager=new SoundManager();
+	LinkedList<Integer> soundQueue=new LinkedList<Integer>();
+	
+
 	Kid kid;
 	float x;
 	float y;
 	int i = 4;
-	ScoreManager score=null;
+	ScoreManager scoreManager;
 	TimerCalScreen timeCalScreen;
-	
+	Coin coin;
 	// boolean touched=false;
 //	GestureDetector gestureDetector;
 
@@ -56,12 +55,15 @@ public class GameThread extends Thread implements OnTouchListener,
 		chick = game.chick;
 		cat = game.cat;
 		ant = game.ant;
-		antFood = game.antFood;
-		crow = game.crow;
+		
+		
+		
 		kid = game.kid;
 		surfaceViewGame = game.surfaceView;
 		surfaceViewGame.setOnTouchListener(this);
 		timeCalScreen=game.timeCalScreen;
+		coin=game.coin;
+		
 		// gestureDetector=new GestureDetector(this);
 
 	}
@@ -80,8 +82,9 @@ public class GameThread extends Thread implements OnTouchListener,
 				Log.d("HEN", ex.toString());
 			}
 		}
-	//	timeCalScreen.stop();
-		Log.d("TIME UPS","time ups");
+	   //timeCalScreen.stop();
+		//Log.d("TIME UPS","time ups");
+		AllConstants.SCORE=game.scoreManager.score;
 		Intent scoreScreenIntent=new Intent(playScreen, ScoreScreenActivity.class);		
 		playScreen.startActivity(scoreScreenIntent);
 	}
@@ -96,6 +99,7 @@ public class GameThread extends Thread implements OnTouchListener,
 			canvas = holder.lockCanvas(null);
 			synchronized (holder) {
 				Draw(canvas);
+				PlaySounds();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -135,11 +139,8 @@ public class GameThread extends Thread implements OnTouchListener,
 			canvas.drawBitmap(ant[i].NextBitmap(), ant[i].x, ant[i].y, new Paint());
 		}
 		}
-		antFood.DoUpdate();
-		canvas.drawBitmap(antFood.NextBitmap(), antFood.x, antFood.y,new Paint());
 		
-		crow.DoUpdate();
-		canvas.drawBitmap(crow.NextBitmap(), crow.x, crow.y, new Paint());
+		
 
 		kid.DoUpdate(game);
 		canvas.drawBitmap(kid.NextBitmap(), kid.x, kid.y, new Paint());
@@ -147,7 +148,21 @@ public class GameThread extends Thread implements OnTouchListener,
 		
 		hen.DoUpdate(game);
 		canvas.drawBitmap(hen.NextBitmap(), hen.x, hen.y, new Paint());
+		if(coin.visibility){
+		coin.DoUpdate(game);
+		canvas.drawBitmap(coin.NextBitmap(),coin.x,coin.y,new Paint());
+		}
+		
 
+	}
+	
+	private void PlaySounds()
+	{
+		if(!soundQueue.isEmpty())
+		{
+			soundManager.play(playScreen.getBaseContext(),soundQueue.remove());
+		}
+		
 	}
 
 	@Override
@@ -209,6 +224,7 @@ public class GameThread extends Thread implements OnTouchListener,
 				hen.target=AllConstants.HEN_TARGET_CAT;			
 				Log.d("HEN", "Hen Walk assigned");
 				Log.d("HEN", hen.henAction);
+				
 
 			}
 			else 
@@ -248,44 +264,6 @@ public class GameThread extends Thread implements OnTouchListener,
 
 	
 
-	@Override
-	public boolean onDown(MotionEvent arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-			float velocityY) {
-		// TODO Auto-generated method stub
-		Log.d("HEN", "fling handled");
-		hen.henAction = AllConstants.HEN_FLY;
-		return false;
-	}
-
-	@Override
-	public void onLongPress(MotionEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
-			float distanceY) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void onShowPress(MotionEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public boolean onSingleTapUp(MotionEvent e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 }

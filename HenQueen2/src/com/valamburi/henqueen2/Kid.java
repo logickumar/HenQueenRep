@@ -19,7 +19,7 @@ public class Kid extends GameScreenObject{
 		this.y=y;
 		this.action=action;
 		nextIndex=0;
-		kid_target=AllConstants.KID_TARGRT_CHICK;
+		kid_target=AllConstants.KID_TARGET_CHICK;
 	}
 	public void DoUpdate(Game game)
 	{
@@ -61,13 +61,13 @@ public class Kid extends GameScreenObject{
 				
 		}*/
 		
-		Log.d("KID", kid_starty + "" + kid_endy + "" + chick.y + "" +chick.chick_endy);
-		if((kid_starty>=chick.y && kid_starty<=chick.chick_endy) || (kid_endy>=chick.y && kid_endy<=chick.chick_endy))			
-		 {
-			Log.d("KID", "Inside chick & kid collision condition");
-			 game.isRunning=false;
-		 }
-		/*if(kid_target.equals(AllConstants.KID_TARGRT_CHICK))
+//		Log.d("KID", kid_starty + "" + kid_endy + "" + chick.y + "" +chick.chick_endy);
+//		if((kid_starty>=chick.y && kid_starty<=chick.chick_endy) || (kid_endy>=chick.y && kid_endy<=chick.chick_endy))			
+//		 {
+//			Log.d("KID", "Inside chick & kid collision condition");
+//			 game.isRunning=false;
+//		 }
+		if(kid_target.equals(AllConstants.KID_TARGET_CHICK))
 		{
 			Log.d("KID", "Inside Target chick condition");
 			if((kid_starty>=chick.y && kid_starty<=chick.chick_endy) || (kid_endy>=chick.y && kid_endy<=chick.chick_endy))
@@ -76,12 +76,26 @@ public class Kid extends GameScreenObject{
 				Log.d("KID", "Inside chick & kid collision condition");
 				 game.isRunning=false;
 			 }
-		}else
+		}else if(kid_target.equals(AllConstants.KID_TARGET_NULL))
 		{
 			Random rm=new Random();
 			float random=rm.nextInt(50);
+			if(action==AllConstants.KID_WALK_FRONT && kid_starty> game.screenwidth+100)
+			{
+				y= game.screenwidth+100 + random;
+				action=AllConstants.KID_WALK_BACK;
+				kid_target=AllConstants.KID_TARGET_CHICK;
+				Log.d("nextkid","walking back");
+			}
+			else if(action==AllConstants.KID_WALK_BACK && kid_endy<-100)					
+			{
+				y=0-100-random;
+				kid_target=AllConstants.KID_TARGET_CHICK;
+				action=AllConstants.KID_WALK_FRONT;
+				Log.d("nextkid","walking front");
+			}
 		
-			if(y>game.screenwidth)
+			/*if(y>game.screenwidth)
 			{
 				y+=random;
 				action=AllConstants.KID_WALK_BACK;
@@ -93,8 +107,8 @@ public class Kid extends GameScreenObject{
 				y-=random;
 				action=AllConstants.KID_WALK_FRONT;
 				Log.d("nextKid","walking front");
-			}
-		}*/
+			}*/
+		}
 		
 		
 		

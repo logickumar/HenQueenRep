@@ -50,7 +50,7 @@ public class Hen extends GameScreenObject
 		Kid kid=game.kid;
 		Coin coin=game.coin;
 		ScoreManager scoreManager=game.scoreManager;
-		
+		GameThread gameThread=game.gameThread;
 		
 		
 		
@@ -70,6 +70,7 @@ public class Hen extends GameScreenObject
 				
 					if(hen_endy<ant[i].y+4)// && hen_endy<=ant[i].ant_endy )
 					{
+						gameThread.soundQueue.add(resources.playables.get(henAction));
 						y+=10;	
 						Log.d("HEN", "Walking Front");
 						
@@ -88,8 +89,10 @@ public class Hen extends GameScreenObject
 				{
 					if(y>ant[i].ant_endy-4)// && y>=ant[i].ant_starty)
 					{
+						gameThread.soundQueue.add(resources.playables.get(henAction));
 						y-=10;
 						Log.d("HEN", "Walking Back");
+						
 					}
 					else
 					{
@@ -112,22 +115,26 @@ public class Hen extends GameScreenObject
 				{
 					y+=5;
 					Log.d("HEN","Walking Front");
+					
 				}else
 				{					
 					henAction=AllConstants.HEN_STAND_FRONT;
 					chick.nextChickAction=AllConstants.CHICK_WITH_FOOD;
+					// game.gameThread.soundQueue.add(resources.playables.get(chick.nextChickAction));
 					Log.d("chick","chick_with_food");
 					
-					scoreManager.add(10);
+					scoreManager.add(1);
+					coin.visibility=true;
 					coin.action=AllConstants.WIN_COIN;
 					
+					Log.d("coin", "win_coin");
 				}
 			
 	}
 			else if(henAction==AllConstants.HEN_WALK_WITH_FOOD_BACK )
 			{
 			
-					if(y>chick.y && y>chick.chick_endy)
+					if(hen_endy>chick.y && hen_endy>chick.chick_endy)
 					{
 						y-=5;
 						Log.d("HEN","Walking back");
@@ -136,14 +143,17 @@ public class Hen extends GameScreenObject
 					{
 						henAction=AllConstants.HEN_STAND_BACK;
 						chick.nextChickAction=AllConstants.CHICK_WITH_FOOD;
-					    scoreManager.add(10);
+						// game.gameThread.soundQueue.add(resources.playables.get(chick.nextChickAction));
+					    scoreManager.add(1);
 					    coin.action=AllConstants.WIN_COIN;
+					    Log.d("coin", "win_coin");
 					}
 			}
 	if(henAction==AllConstants.HEN_WALK_FRONT && target.equals(AllConstants.HEN_TARGET_CAT))
 	{
 		if(hen_endy<cat.y)// && y<=cat.y+cat.catWidth)
 		{
+			gameThread.soundQueue.add(resources.playables.get(henAction));
 			y+=12;	
 			Log.d("HEN", "Walking Front");			
 		}
@@ -151,11 +161,13 @@ public class Hen extends GameScreenObject
 		else
 		{
 		  henAction=AllConstants.HEN_HIT_FRONT;
+		  gameThread.soundQueue.add(resources.playables.get(henAction));
 		  Log.d("HEN", "Hit Front");
 		  nextHenAction=AllConstants.HEN_STAND_FRONT;
 		  //cat.cat_target=AllConstants.CAT_TARGET_CHICK;
 		  cat.action=AllConstants.CAT_WALK_FRONT;
-		  //cat.cat_target=AllConstants.CAT_TARGET_NULL;
+		 // game.gameThread.soundQueue.add(resources.playables.get(cat.action));
+		  cat.cat_target=AllConstants.CAT_TARGET_NULL;
 		 
 		  //scoreManager.add(10);
 		}
@@ -164,17 +176,20 @@ public class Hen extends GameScreenObject
 	{
 		if(hen_endy>cat.y)// && y>cat.y+cat.catWidth)
 		{
+			gameThread.soundQueue.add(resources.playables.get(henAction));
 			y-=12;
 			Log.d("HEN", "Walking Back");
+			 
 		}
 		
 		else
 		{			
 			henAction=AllConstants.HEN_HIT_BACK;
+			gameThread.soundQueue.add(resources.playables.get(henAction));
 			Log.d("HEN", "Hit Back");
 			nextHenAction=AllConstants.HEN_STAND_BACK;
 			cat.action=AllConstants.CAT_WALK_BACK;
-			//cat.cat_target=AllConstants.CAT_TARGET_NULL;
+			cat.cat_target=AllConstants.CAT_TARGET_NULL;
 			
 			// score.add(10);
 		}
@@ -183,6 +198,7 @@ public class Hen extends GameScreenObject
 	{
 		if(hen_endy<kid.y)// && y<=kid.y+kid.kidWidth)
 		{
+			gameThread.soundQueue.add(resources.playables.get(henAction));
 			y+=10;	
 			Log.d("HEN", "Walking Front");			
 		}
@@ -190,27 +206,34 @@ public class Hen extends GameScreenObject
 		else
 		{
 		  henAction=AllConstants.HEN_HIT_FRONT;
+		  gameThread.soundQueue.add(resources.playables.get(henAction));
+		  Log.d("HEN", "Hit Front");
 		  nextHenAction=AllConstants.HEN_STAND_FRONT;
 		  kid.action=AllConstants.KID_WALK_FRONT;
-		 // score.add(10);
-		  Log.d("HEN", "Hit Front");
+		  kid.kid_target=AllConstants.KID_TARGET_NULL;
+		  scoreManager.add(1);
+		 
 		}
     }
 	else if(henAction==AllConstants.HEN_WALK_BACK && target.equals(AllConstants.HEN_TARGET_KID))
 	{
 		if(y>kid.kid_endy)// && y>kid.y+kid.kidWidth)
 		{
+			gameThread.soundQueue.add(resources.playables.get(henAction));
 			y-=10;
 			Log.d("HEN", "Walking Back");
 		}
 		
 		else
-		{			
+		{	
+			
 			henAction=AllConstants.HEN_HIT_BACK;
+			gameThread.soundQueue.add(resources.playables.get(henAction));
+			Log.d("HEN", "Hit Back");
 			kid.action=AllConstants.KID_WALK_BACK;
 			nextHenAction=AllConstants.HEN_STAND_BACK;
-			Log.d("HEN", "Hit Back");
-			// score.add(10);
+			kid.kid_target=AllConstants.KID_TARGET_NULL;
+			scoreManager.add(1);
 		}
 	}
 

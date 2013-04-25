@@ -12,6 +12,6 @@ public class GameObjectResources
 	
 	//public LinkedList<Integer> playables=new LinkedList<Integer>();	
 	public Hashtable<String, GameDrawableList> drawableListsMap=new Hashtable<String, GameDrawableList>(); 
-	
+	public Hashtable<String,Integer>playables=new Hashtable<String,Integer>(); 
 	
 }
